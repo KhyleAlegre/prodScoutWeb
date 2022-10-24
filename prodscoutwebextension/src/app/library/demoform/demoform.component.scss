@@ -1,0 +1,31 @@
+.main {
+    .form {
+        margin: 15px;
+        padding: 10px;
+        border: solid 1px #e1e1e1;
+        box-shadow: 0 5px 5px -4px rgb(224, 217, 217);
+
+        .input-form-standard {
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .signup-btn {
+            background: #256D85;
+            color: #fff;
+            width: 100%;
+        }
+    }
+
+    .footer {
+        font-size: 12px;
+        color: #256D85;
+        text-align: center;
+
+        .contactUs {
+            cursor: pointer;
+            color: #002B5b
+        }
+    }
+}

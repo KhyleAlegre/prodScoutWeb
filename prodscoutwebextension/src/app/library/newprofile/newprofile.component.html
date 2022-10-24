@@ -1,0 +1,118 @@
+<div class="main">
+  <div class="avatarSelect">
+    <h5>Choose an Avatar</h5>
+    <br />
+    <p-splitter [style]="{ height: '150px' }" styleClass="mb-5">
+      <ng-template pTemplate>
+        <div class="avDiv" id="maleDiv">
+          <img [src]="avBoy" class="profileAvatar" />
+          <br />
+          <button
+            pButton
+            type="button"
+            label="Select Benny"
+            class="signup-btn"
+            (click)="selectAvb()"
+          ></button>
+        </div>
+      </ng-template>
+      <ng-template pTemplate>
+        <div class="avDiv" id="femaleDiv">
+          <img [src]="avGirl" class="profileAvatar" />
+          <br />
+          <button
+            pButton
+            type="button"
+            label="Select Laura"
+            class="signup-btn"
+            (click)="selectAvg()"
+          ></button>
+        </div>
+      </ng-template>
+    </p-splitter>
+    <sup *ngIf="noSelectedAV" style="font-size: 10px; color: red">{{
+      avPrompt
+    }}</sup>
+  </div>
+  <div class="form">
+    <p-divider align="center" type="dashed">
+      <b>Please Complete All Details</b>
+    </p-divider>
+    <form>
+      <h5>
+        Profile Id
+        <sup style="font-size: 10px; color: red"
+          >*Required (For Profile Users)</sup
+        >
+      </h5>
+      <input
+        name="profile"
+        type="text"
+        pInputText
+        [(ngModel)]="profileId"
+        class="input-form-standard"
+      />
+      <br />
+      <h5>
+        First Name <sup style="font-size: 10px; color: red">*Required</sup>
+      </h5>
+      <input
+        name="pfname"
+        type="text"
+        pInputText
+        [(ngModel)]="firstName"
+        class="input-form-standard"
+      />
+      <br />
+      <h5>
+        Last Name <sup style="font-size: 10px; color: red">*Required</sup>
+      </h5>
+      <input
+        name="plname"
+        type="text"
+        pInputText
+        [(ngModel)]="lastName"
+        class="input-form-standard"
+      />
+      <br />
+      <h5>
+        Password
+        <sup style="font-size: 10px; color: red"
+          >*Required [Must be at least 6 characters with letters and
+          numbers]</sup
+        >
+      </h5>
+      <input
+        name="pwdp"
+        type="password"
+        pInputText
+        [(ngModel)]="password"
+        class="p-inputtext p-component p-element input-form-standard ng-valid p-filled ng-dirty ng-touched"
+      />
+      <br />
+      <button
+        pButton
+        type="button"
+        label="Add Profile"
+        class="signup-btn"
+        (click)="addProfile()"
+      ></button>
+    </form>
+  </div>
+  <p-dialog
+    header="Profile Added"
+    [modal]="true"
+    [(visible)]="displaySuccess"
+    class="dialogSize"
+  >
+    <div style="text-align: center">
+      <p-divider align="center" type="dashed"></p-divider>
+      <h1 style="color: #8fe3cf">Profile has been added</h1>
+      <br />
+      <h4>
+        You may now use this profile to log in any of our monitoring platform
+      </h4>
+      <p-divider align="center" type="dashed"></p-divider>
+    </div>
+  </p-dialog>
+</div>

@@ -1,0 +1,230 @@
+<div class="main">
+  <div class="titleContainer">
+    <img class="imageLog" src="assets/mp1.png" />
+    <h2>Manage Profiles</h2>
+  </div>
+  <br />
+  <div style="text-align: center">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Back to Dashboard"
+      (click)="backtoDb()"
+    ></button>
+  </div>
+  <br />
+  <div class="selectProfile">
+    <h3>Select a Profile</h3>
+    <br />
+    <select
+      class="input-select-normal"
+      name="profileSelect"
+      [(ngModel)]="selectedProfile"
+      (change)="getProfile()"
+    >
+      <option
+        *ngFor="let profile of profileList"
+        value="{{ profile.profileId }}"
+      >
+        {{ profile.firstName }} {{ profile.lastName }}
+      </option>
+    </select>
+  </div>
+  <br />
+  <div class="displayDataContainer">
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+      "
+    >
+      <h5>First Name:</h5>
+      &nbsp;
+      <input
+        name="uname"
+        type="text"
+        pInputText
+        [(ngModel)]="profileFirstName"
+        class="input-form-standard"
+      />
+      &nbsp; &nbsp; &nbsp;
+      <h5>Last Name:</h5>
+      &nbsp;
+      <input
+        name="uname"
+        type="text"
+        pInputText
+        [(ngModel)]="profileLastName"
+        class="input-form-standard"
+      />
+    </div>
+    <br />
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+      "
+    >
+      <h5>Profile Id:</h5>
+      &nbsp;
+      <input
+        name="uname"
+        type="text"
+        pInputText
+        [(ngModel)]="profileId"
+        class="input-form-standard"
+        disabled
+      />
+      &nbsp; &nbsp; &nbsp;
+      <h5>Password:</h5>
+      &nbsp;
+      <input
+        name="uname"
+        type="text"
+        pInputText
+        [(ngModel)]="profilePassword"
+        class="input-form-standard"
+      />
+    </div>
+
+    <br />
+    <h5>Screenshot Interval:</h5>
+    <input
+      name="uname"
+      type="text"
+      pInputText
+      [(ngModel)]="accountCount"
+      class="input-form-standard"
+    />
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+      "
+    >
+      <h5>Strict Mode:</h5>
+      &nbsp;
+      <p-inputSwitch
+        [(ngModel)]="strictMode"
+        (onChange)="setStrict()"
+      ></p-inputSwitch>
+      &nbsp; &nbsp;&nbsp;
+      <h5>Holiday Mode:</h5>
+      &nbsp;
+      <p-inputSwitch
+        [(ngModel)]="holidayMode"
+        (onChange)="setHoliday()"
+      ></p-inputSwitch>
+    </div>
+
+    <br />
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+      "
+    >
+      <h5>Start Session:</h5>
+      &nbsp;
+      <input
+        name="uname"
+        type="text"
+        pInputText
+        [(ngModel)]="startSession"
+        class="input-form-standard"
+        disabled
+      />
+      &nbsp; &nbsp; &nbsp;
+      <h5>End Session:</h5>
+      &nbsp;
+      <input
+        name="uname"
+        type="text"
+        pInputText
+        [(ngModel)]="endSession"
+        class="input-form-standard"
+        disabled
+      />
+    </div>
+
+    <br />
+  </div>
+  <div
+    style="
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    "
+  >
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Update Account"
+      (click)="updateAccount()"
+    ></button>
+    &nbsp; &nbsp;
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Delete Account"
+      class="p-button-danger"
+      (click)="showPrompt()"
+    ></button>
+  </div>
+  <br />
+</div>
+<p-dialog
+  header="Delete Account"
+  [modal]="true"
+  [(visible)]="displayDeletePrompt"
+  class="dialogSize"
+>
+  <div style="text-align: center">
+    <p-divider align="center" type="dashed"></p-divider>
+    <h1 style="color: #f53d3d">Proceed on Deleting Account?</h1>
+    <br />
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Delete"
+      class="p-button-danger"
+      (click)="deleteAccount()"
+    ></button>
+    &nbsp; &nbsp;
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Cancel"
+      (click)="cancelDelete()"
+    ></button>
+    <p-divider align="center" type="dashed"></p-divider>
+  </div>
+</p-dialog>
+
+<p-dialog
+  header="Update Success"
+  [modal]="true"
+  [(visible)]="displayUpdatePrompt"
+  class="dialogSize"
+>
+  <div style="text-align: center">
+    <p-divider align="center" type="dashed"></p-divider>
+    <h1 style="color: #26e2f0">Profile has been updated</h1>
+    <br />
+    <p-divider align="center" type="dashed"></p-divider>
+  </div>
+</p-dialog>

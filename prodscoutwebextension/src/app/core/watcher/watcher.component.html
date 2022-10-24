@@ -1,0 +1,64 @@
+<div
+  class="main"
+  style="height: 340px; width: 300px; margin: 10px; border: solid 1px #e1e1e1"
+>
+  <div class="imageContainer" style="text-align: center; margin: 5px">
+    <img src="assets/ps48.png" height="40" />
+  </div>
+  <div style="text-align: center">
+    <hr />
+    <h3>Webby - prodScout Watcher for Web Browsers</h3>
+    <hr />
+  </div>
+  <div style="text-align: center">
+    <button class="extenLogin" type="submit" (click)="showForm()">
+      Send Scouts to this Browser
+    </button>
+  </div>
+  <div style="text-align: center" *ngIf="showWatcher">
+    <h2>Log-In (Managed Profiles)</h2>
+    <br />
+    <form>
+      <label clas="extenLabel"
+        >Profile Id:
+        <sup *ngIf="noId" style="font-size: 10px; color: red">{{
+          profilePrompt
+        }}</sup></label
+      >
+      <br />
+      <input
+        type="text"
+        placeholder="username"
+        class="input-form-extension"
+        [(ngModel)]="profId"
+      />
+      <br />
+      <label clas="extenLabel"
+        >Password:
+        <sup *ngIf="noPassword" style="font-size: 10px; color: red">{{
+          passwordPrompt
+        }}</sup>
+      </label>
+      <br />
+      <input
+        type="password"
+        placeholder="password"
+        class="input-form-extension"
+        [(ngModel)]="password"
+      />
+      <br />
+      <br />
+      <div *ngIf="invalidCredential" style="font-size: 10px; color: red">
+        {{ invalidCredentialPrompt }}
+      </div>
+      <button class="extenLogin" type="submit" (click)="login()">
+        Scout this Browser
+      </button>
+    </form>
+    <h4 style="margin: 20px">
+      Forgot the Profile Password? Please Login to your main account to change
+      it.
+    </h4>
+    <h5>2022 - ProdScout (Webby)</h5>
+  </div>
+</div>

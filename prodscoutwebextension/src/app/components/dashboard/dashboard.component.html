@@ -1,0 +1,127 @@
+<div class="main">
+  <div class="topdash">
+    <p-menubar [model]="items">
+      <ng-template pTemplate="start">
+        <img src="assets/ps48.png" height="40" class="mr-2" />
+      </ng-template>
+      <ng-template pTemplate="end">
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-bell"
+          class="p-button-rounded p-button-text"
+        ></button>
+
+        <img
+          alt="logo"
+          [src]="logProfileUrl"
+          (click)="op.toggle($event)"
+          style="
+            width: 3rem;
+            height: 3rem;
+            border-radius: 10px;
+            border: solid 1px #e1e1e1;
+            cursor: pointer;
+          "
+        />
+      </ng-template>
+      <p-overlayPanel #op>
+        <ng-template pTemplate class="overlayProfile">
+          <li
+            style="list-style: none; margin: 10px; cursor: pointer"
+            (click)="openProfile()"
+          >
+            My Profile
+          </li>
+          <p-divider type="dashed"> </p-divider>
+          <li
+            style="list-style: none; margin: 10px; cursor: pointer"
+            (click)="logOut()"
+          >
+            Log Out
+          </li>
+        </ng-template>
+      </p-overlayPanel>
+    </p-menubar>
+  </div>
+  <br />
+  <label style="margin: 5px; font-weight: bold; font-size: 18px"
+    >My Profiles:</label
+  >
+  <div class="middledash">
+    <li>
+      <button
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-plus"
+        class="p-button-rounded p-button-secondary p-button-outlined"
+        (click)="addNewProfile()"
+      ></button>
+      <p-dialog
+        header="New Profile"
+        [modal]="true"
+        [(visible)]="displayAddProfile"
+        class="dialogSize"
+      >
+        <app-newprofile></app-newprofile>
+      </p-dialog>
+      <br />
+      <label>Add New</label>
+    </li>
+    <li
+      *ngFor="let profiles of profileList"
+      (click)="loadActivities(profiles)"
+      id="selectedAvatar"
+    >
+      <img [src]="profiles.profileUrl" class="profileAvatar" />
+      <br />
+      <label>{{ profiles.firstName }} {{ profiles.lastName }} </label>
+    </li>
+  </div>
+  <div class="lowerdash">
+    <div class="activityLog">
+      <label style="margin: 5px; font-weight: bold; font-size: 18px">
+        Activity Logs {{ displayName }}
+      </label>
+      <hr style="border-color: #e1e1e1" />
+      <p-panel
+        header="Captured Event - {{ events.deviceType }} - {{
+          events.profileStatus
+        }}"
+        [toggleable]="true"
+        *ngFor="let events of eventList"
+      >
+        <ng-template pTemplate="icons"> </ng-template>
+        <p><b>Logged Activity</b> : {{ events.sessionMode }}</p>
+        <p><b>Activity Violation</b>: {{ events.violationLevel || "None" }}</p>
+        <p>
+          <b>Activity Timestamp</b>: {{ events.displaySessionDate }} -
+          {{ events.displaySessionTime }}
+        </p>
+        <p-image
+          [src]="events.photoUrl"
+          alt="Image"
+          width="80"
+          [preview]="true"
+        ></p-image>
+        <br />
+        <p>
+          Saved Screenshot - ({{ events.displaySessionDate }} -
+          {{ events.displaySessionTime }})
+        </p>
+      </p-panel>
+      <br />
+    </div>
+    <div class="userTools">
+      <label class="toolLabel"> Monitoring Tools {{ displayName }} </label>
+      <div class="mobileContainer">
+        <app-mobiletools></app-mobiletools>
+      </div>
+      <div class="toolContainer">
+        <app-dashtools></app-dashtools>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="main">
+  <div class="login">
+    <h2 style="margin-left: 5px; text-align: center">
+      Hello There! Welcome Back
+    </h2>
+    <br />
+    <h5>
+      Email
+      <sup *ngIf="noEmail" style="font-size: 10px; color: red">{{
+        emailPrompt
+      }}</sup>
+    </h5>
+    <input
+      type="text"
+      pInputText
+      [(ngModel)]="email"
+      class="input-form-standard"
+    />
+    <br />
+    <h5>
+      Password
+      <sup *ngIf="noPassword" style="font-size: 10px; color: red">{{
+        pwPrompt
+      }}</sup>
+    </h5>
+    <input
+      type="password"
+      pInputText
+      [(ngModel)]="password"
+      class="input-form-standard"
+    />
+    <div class="invalid" *ngIf="invalidLogin">
+      Hi! Unfortunately your credentials doesn't match, please try again.
+    </div>
+    <br />
+    <button
+      pButton
+      type="button"
+      label="LOG IN"
+      (click)="logIn()"
+      class="signup-btn"
+    ></button>
+    <br />
+    <br />
+    <div class="forgotPassword">Forgot Your Password?</div>
+    <p-divider align="center" type="dashed" class="isMobile">
+      <b>Don't have an account yet?</b>
+    </p-divider>
+    <div class="button isMobile">
+      <button
+        (click)="showRegister()"
+        pButton
+        type="button"
+        label="SIGN UP HERE"
+        class="login-btn"
+      ></button>
+      <p-dialog
+        header="Register"
+        [(visible)]="displayRegister"
+        [style]="{ width: '50vw', height: '80vw' }"
+      >
+        <app-register></app-register>
+      </p-dialog>
+    </div>
+  </div>
+  <br />
+  <div class="footer">2022 - prodScout | All Rights Reserve</div>
+</div>

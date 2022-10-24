@@ -1,0 +1,36 @@
+<div class="main">
+  <div class="searchbox">
+    <label>Search Details:</label>
+    <br />
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input
+        type="text"
+        pInputText
+        placeholder="Search"
+        [(ngModel)]="filterValue"
+      />
+    </span>
+  </div>
+  <div class="logTable">
+    <div class="tableHeader">
+      <div class="h1">
+        <b>Activity</b>
+      </div>
+      <div class="h2">
+        <b>Timestamp</b>
+      </div>
+    </div>
+    <div
+      class="tableValues"
+      *ngFor="let events of eventList | filter: filterValue"
+    >
+      <div class="c1">
+        {{ events.eventDetails }}
+      </div>
+      <div class="c2">
+        {{ events.logDate.toDate() | date: "yyyy/MM/dd h:mm:ss a" }}
+      </div>
+    </div>
+  </div>
+</div>

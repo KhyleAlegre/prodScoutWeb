@@ -1,0 +1,26 @@
+<div class="main">
+  <div class="mobileNavList">
+    <li>Product</li>
+    <li>Families</li>
+    <li>School</li>
+    <p-divider align="center" type="dashed"></p-divider>
+    <li (click)="openLogin()"><b>Log In</b></li>
+    <p-dialog
+      header="Log In"
+      [modal]="true"
+      [(visible)]="displayBasic"
+      [style]="{ width: '80vw', height: '150vw' }"
+    >
+      <app-login></app-login>
+    </p-dialog>
+    <li (click)="openRegister()"><b>Register</b></li>
+    <p-dialog
+      header="Register"
+      [modal]="true"
+      [(visible)]="displayRegister"
+      [style]="{ width: '80vw', height: '150vw' }"
+    >
+      <app-register></app-register>
+    </p-dialog>
+  </div>
+</div>

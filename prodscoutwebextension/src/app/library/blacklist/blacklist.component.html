@@ -1,0 +1,121 @@
+<div class="main">
+  <div class="titleContainer">
+    <img class="blackList" src="assets/bl.png" />
+    <h2>Manage Blacklist Sites</h2>
+  </div>
+  <div class="addSiteContainer">
+    <div class="l1">
+      <h5>Site / Url</h5>
+      <input
+        type="text"
+        pInputText
+        [(ngModel)]="urlSite"
+        class="input-form-standard"
+      />
+    </div>
+    <div class="l2">
+      <h5>Select Category</h5>
+      <p-dropdown
+        [options]="categories"
+        [(ngModel)]="categoryValue"
+        placeholder="Select a Category"
+        optionLabel="value"
+        [showClear]="true"
+        autoWidth="false"
+        [style]="{ width: '98%' }"
+      ></p-dropdown>
+    </div>
+    <div class="l3">
+      <br />
+      <p-button
+        label="Add to Blacklist"
+        [style]="{ width: '98%' }"
+        (click)="addSite()"
+      ></p-button>
+    </div>
+  </div>
+  <br />
+  <div class="dataContainer">
+    <div class="siteListHeader">
+      <div class="h1">
+        <b><label>Website / URL</label></b>
+      </div>
+
+      <div class="h2">
+        <b><label>Category</label></b>
+      </div>
+
+      <div class="h3">
+        <b><label>Actions</label></b>
+      </div>
+    </div>
+
+    <div class="siteList" *ngFor="let list of blackList">
+      <div class="c1">{{ list.samplesite }}</div>
+      <div class="c2">{{ list.category }}</div>
+      <div class="c3">
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-times"
+          class="p-button-rounded p-button-danger p-button-sm"
+          (click)="getSite(list)"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="text-align: center">
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="Back to Dashboard"
+    (click)="backtoDb()"
+  ></button>
+</div>
+<p-dialog
+  header="Profile Added"
+  [modal]="true"
+  [(visible)]="displayAddPrompt"
+  class="dialogSize"
+>
+  <div style="text-align: center">
+    <p-divider align="center" type="dashed"></p-divider>
+    <h1 style="color: #8fe3cf">Site Added</h1>
+    <br />
+    <h4>Site has been added to the blacklist</h4>
+    <p-divider align="center" type="dashed"></p-divider>
+  </div>
+</p-dialog>
+
+<p-dialog
+  header="Remove from Blacklist"
+  [modal]="true"
+  [(visible)]="displayDeletePrompt"
+  class="dialogSize"
+>
+  <div style="text-align: center">
+    <p-divider align="center" type="dashed"></p-divider>
+    <h1 style="color: #f53d3d">Remove from being blacklisted?</h1>
+    <br />
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Delete"
+      class="p-button-danger"
+      (click)="deleteSite()"
+    ></button>
+    &nbsp; &nbsp;
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Cancel"
+      (click)="cancelDelete()"
+    ></button>
+    <p-divider align="center" type="dashed"></p-divider>
+  </div>
+</p-dialog>

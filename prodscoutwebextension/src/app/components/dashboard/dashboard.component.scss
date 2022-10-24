@@ -1,0 +1,100 @@
+.main {
+  margin: 5px;
+
+  .middledash {
+    margin: 10px;
+    border: solid 1px #e1e1e1;
+    border-radius: 5px;
+
+    @media only screen and (max-width: 480px) {
+      .profileAvatar {
+        height: 3rem;
+        width: 3rem;
+        border-radius: 30px;
+      }
+      .dialogSize {
+        width: 80vw;
+      }
+    }
+
+    @media only screen and (min-width: 480px) {
+      .profileAvatar {
+        height: 5rem;
+        width: 5rem;
+        border-radius: 30px;
+      }
+    }
+
+    li {
+      list-style: none;
+      display: inline-block;
+      margin: 30px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .dialogSize {
+      width: 50vw;
+    }
+  }
+
+  .lowerdash {
+    margin: 10px;
+
+    @media only screen and (max-width: 480px) {
+      .activityLog {
+        width: 100%;
+      }
+
+      .toolContainer {
+        display: none;
+        visibility: hidden;
+      }
+
+      .toolLabel {
+        visibility: hidden;
+        display: none;
+        margin: 5px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .mobileContainer {
+        margin-left: 40%;
+      }
+    }
+
+    @media only screen and (min-width: 480px) {
+      display: grid;
+      grid-template-columns: 1.5fr 0.5fr;
+      grid-template-rows: 1fr;
+
+      .activityLog {
+        grid-column: 1/2;
+        grid-row: 1/2;
+      }
+
+      .userTools {
+        grid-column: 2/3;
+        grid-row: 1/2;
+        margin-left: 5px;
+
+        .toolContainer {
+          border: solid 1px #e1e1e1;
+          border-radius: 5px;
+        }
+
+        .toolLabel {
+          margin: 5px;
+          font-weight: bold;
+          font-size: 18px;
+        }
+      }
+
+      .mobileContainer {
+        display: none;
+        visibility: hidden;
+      }
+    }
+  }
+}

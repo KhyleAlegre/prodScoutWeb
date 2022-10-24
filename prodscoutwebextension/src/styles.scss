@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+/* You can add global styles to this file, and also import other style files */
+//Typography
+//**MAVENPRO**
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500&display=swap');
+//**SOFIAPRO**
+@font-face {
+    font-family: "SofiaPro";
+    src:local("SofiaPro"), url(./assets/fonts/sofiapro-light.otf)
+}
+
+ $primary-font: "SofiaPro";
+ $secondary-font: 'Maven Pro', sans-serif;
+
+ //Colors
+
+ $tone1: #002B5B;
+ $tone2: #2B4865;
+ $tone3: #256D85;
+ $tone4: #8FE3CF;
+ $fill: #FBFBFB;
+
+body {
+    font-family: $primary-font;
+    background: $fill;   
+}
+
+

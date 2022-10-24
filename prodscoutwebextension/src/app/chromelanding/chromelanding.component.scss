@@ -1,0 +1,19 @@
+.main {
+ display: grid;
+ grid-template-columns: 1fr;
+ grid-template-rows:  1fr 1fr 1fr;
+ 
+   .navigation {
+        grid-column: 1/2;
+        grid-row: 1/2;
+        height: 100px;
+          
+    }
+    
+    .upper {
+        grid-column: 1/2;
+        grid-row: 2/3;
+        height: 100px;
+    }
+
+}

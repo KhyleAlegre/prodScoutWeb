@@ -1,0 +1,177 @@
+<div class="main">
+  <div class="profileImageContainer">
+    <img alt="logo" [src]="logProfileUrl" class="profileImage" />
+    <br />
+
+    <p-fileUpload
+      #fubauto
+      mode="basic"
+      name="demo[]"
+      [customUpload]="true"
+      accept=".jpeg,.png,.jpg"
+      [maxFileSize]="1000000"
+      [auto]="true"
+      (uploadHandler)="browseImage($event)"
+      chooseLabel="Upload"
+    ></p-fileUpload>
+  </div>
+  <div class="profileContainer">
+    <h2>{{ firstName }} {{ lastName }}</h2>
+    <p-divider align="center" type="dashed">
+      <b>My Profile</b>
+    </p-divider>
+    <form>
+      <h5>Account Id:</h5>
+      <input
+        name="uname"
+        type="text"
+        pInputText
+        [(ngModel)]="username"
+        class="input-form-standard"
+        disabled
+      />
+      <br />
+      <h5>Password:</h5>
+      <p-button
+        label="Change Password"
+        icon="pi pi-lock"
+        class="p-button-help"
+        (click)="showPasswordChange()"
+      ></p-button>
+      <br />
+      <br />
+      <h5>
+        First Name:<sup
+          style="font-size: 10px; color: red"
+          *ngIf="fieldCheckerFname"
+          >*This field must not be emptly</sup
+        >
+      </h5>
+      <input
+        name="fnme"
+        type="text"
+        pInputText
+        [(ngModel)]="firstName"
+        class="input-form-standard"
+      />
+      <br />
+      <h5>
+        Last Name:<sup
+          style="font-size: 10px; color: red"
+          *ngIf="fieldCheckerLname"
+          >*This field must not be emptly</sup
+        >
+      </h5>
+      <input
+        name="lnme"
+        type="text"
+        pInputText
+        [(ngModel)]="lastName"
+        class="input-form-standard"
+      />
+      <br />
+      <h5>
+        Email:<sup style="font-size: 10px; color: red" *ngIf="fieldCheckerEmail"
+          >*This field must not be emptly</sup
+        >
+        <sup style="font-size: 10px; color: red" *ngIf="emailChecker"
+          >*This Email has been used already, please use another one</sup
+        >
+      </h5>
+      <input
+        name="eml"
+        type="text"
+        pInputText
+        [(ngModel)]="email"
+        class="input-form-standard"
+      />
+      <br />
+      <h5>
+        Contact No:<sup
+          style="font-size: 10px; color: red"
+          *ngIf="fieldCheckerContact"
+          >*This field must not be emptly</sup
+        >
+      </h5>
+      <input
+        name="cno"
+        type="text"
+        pInputText
+        [(ngModel)]="contactNo"
+        class="input-form-standard"
+      />
+    </form>
+    <p-divider align="center" type="dashed"> </p-divider>
+    <p-button label="Update Profile" (click)="updateProfile()"></p-button>
+  </div>
+  <div class="updateSuccess">
+    <p-dialog
+      header="Update Success"
+      class="dxS"
+      [modal]="true"
+      [(visible)]="displayUpdateSuccess"
+    >
+      <img src="assets/check.png" style="height: 3rem; width: 3rem" />
+      <br />
+      <label> Your Profile has been updated! </label>
+    </p-dialog>
+  </div>
+  <div class="passwordDlog">
+    <p-dialog
+      header="Password Settings"
+      class="dxS"
+      [modal]="true"
+      [(visible)]="displayChangePassword"
+    >
+      <p-divider align="center" type="dashed"> Change Password </p-divider>
+      <br />
+      <form>
+        <h5>
+          Old Password:
+          <sup
+            style="font-size: 10px; color: red"
+            *ngIf="validatePasswordChecker"
+            >*Incorrect Password</sup
+          >
+        </h5>
+        <input
+          name="oldpwdp"
+          type="password"
+          pInputText
+          [(ngModel)]="oldPassword"
+          class="p-inputtext p-component p-element input-form-standard ng-valid p-filled ng-dirty ng-touched"
+        />
+        <br />
+        <h5>
+          Enter New Password:
+          <sup style="font-size: 10px; color: red" *ngIf="oldpasswordChecker"
+            >*Your new password shouldn't not be your new password</sup
+          >
+        </h5>
+        <input
+          name="newpwdp"
+          type="password"
+          pInputText
+          [(ngModel)]="newPassword"
+          class="p-inputtext p-component p-element input-form-standard ng-valid p-filled ng-dirty ng-touched"
+        />
+        <br />
+        <h5>
+          Repeat New Password:
+          <sup style="font-size: 10px; color: red" *ngIf="passwordChecker"
+            >*Password didn't Match</sup
+          >
+        </h5>
+        <input
+          name="rxpwdp"
+          type="password"
+          pInputText
+          [(ngModel)]="checkPassword"
+          class="p-inputtext p-component p-element input-form-standard ng-valid p-filled ng-dirty ng-touched"
+        />
+
+        <p-button label="Update Password" (click)="updatePassword()"></p-button>
+      </form>
+    </p-dialog>
+  </div>
+</div>

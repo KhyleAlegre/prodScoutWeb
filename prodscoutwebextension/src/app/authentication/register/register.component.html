@@ -1,0 +1,125 @@
+<div class="main">
+  <div class="form">
+    <h2 style="margin-left: 5px; text-align: center">Sign Up for an Account</h2>
+    <p-divider align="center" type="dashed"></p-divider>
+    <div class="logIn">
+      Already have an account? Try to
+      <label (click)="openLogin()">Sign In</label>.
+    </div>
+
+    <div class="logIn" *ngIf="displayLogin">
+      <app-login></app-login>
+    </div>
+    <br />
+    <p-divider align="center" type="dashed">
+      <b>Please Fill in Your Details</b>
+    </p-divider>
+    <form>
+      <h5>
+        First Name <sup style="font-size: 10px; color: red">*Required</sup>
+      </h5>
+      <input
+        name="fname"
+        type="text"
+        pInputText
+        [(ngModel)]="firstName"
+        class="input-form-standard"
+        required
+      />
+      <br />
+      <h5>
+        Last Name <sup style="font-size: 10px; color: red">*Required</sup>
+      </h5>
+      <input
+        name="lname"
+        type="text"
+        pInputText
+        [(ngModel)]="lastName"
+        class="input-form-standard"
+        required
+      />
+      <br />
+      <h5>Email <sup style="font-size: 10px; color: red">*Required</sup></h5>
+      <input
+        name="email"
+        type="text"
+        pInputText
+        [(ngModel)]="email"
+        class="input-form-standard"
+        required
+      />
+      <br />
+      <h5>
+        Password
+        <sup style="font-size: 10px; color: red"
+          >*Required [Must be at least 6 characters with letters and
+          numbers]</sup
+        >
+      </h5>
+      <input
+        name="pwd"
+        type="password"
+        pInputText
+        [(ngModel)]="password"
+        class="input-form-standard"
+        required
+      />
+      <br />
+      <h5>
+        Re-Type Password
+        <sup *ngIf="isMismatched" style="font-size: 10px; color: red">{{
+          mismatchPrompt
+        }}</sup>
+      </h5>
+      <input
+        name="pwedChk"
+        type="password"
+        pInputText
+        [(ngModel)]="passwordCheck"
+        class="input-form-standard"
+        required
+      />
+      <br />
+      <h5>
+        Mobile No <sup style="font-size: 10px; color: red">*Required</sup>
+      </h5>
+      <input
+        id="mobileNo"
+        name="mobileno"
+        type="text"
+        pInputText
+        [(ngModel)]="contactNo"
+        class="input-form-standard"
+        required
+      />
+      <br />
+      <button
+        pButton
+        type="button"
+        label="SIGN UP"
+        class="signup-btn"
+        (click)="signUp()"
+      ></button>
+    </form>
+    <p-dialog
+      header="Register Success"
+      [modal]="true"
+      [(visible)]="displaySuccess"
+      class="dialogSize"
+    >
+      <div style="text-align: center">
+        <p-divider align="center" type="dashed"></p-divider>
+        <h1 style="color: #8fe3cf">Registration Success</h1>
+        <h2>Welcome to prodScout!</h2>
+        <h4>A notification shall be sent to you in any moment</h4>
+        <p-divider align="center" type="dashed"></p-divider>
+      </div>
+    </p-dialog>
+    <p-divider align="center" type="dashed"></p-divider>
+    <div class="footer">
+      School or Institution? Please
+      <a class="contactUs"><b>Contact Us</b></a> for the corporate Sign Up
+      Account
+    </div>
+  </div>
+</div>

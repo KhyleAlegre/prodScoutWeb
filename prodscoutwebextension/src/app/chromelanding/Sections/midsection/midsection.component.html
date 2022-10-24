@@ -1,0 +1,74 @@
+<div class="main">
+  <br />
+  <div class="midLabel">
+    <label>Manage your child’s <b>digital well being</b></label>
+    <br />
+    <label>during online classes in partnership with their schools.</label>
+  </div>
+
+  <div class="displayCards">
+    <li>
+      <p-card header="Worry Free Online Class" class="cardStyles">
+        <ng-template pTemplate="header">
+          <img class="imgCards" alt="Card" src="assets/p1.png" />
+        </ng-template>
+        <p>
+          Ensure that your child’s online class are monitored properly by you
+          and the school
+        </p>
+      </p-card>
+    </li>
+    <li>
+      <p-card header="Extensive Supervisions" class="cardStyles">
+        <ng-template pTemplate="header">
+          <img class="imgCards" alt="Card" src="assets/p2.png" />
+        </ng-template>
+        <p>
+          Track what websites, apps or games are being launched and restrict non
+          school activities during classes
+        </p>
+      </p-card>
+    </li>
+    <li>
+      <p-card header="Manage Online Activities" class="cardStyles">
+        <ng-template pTemplate="header">
+          <img class="imgCards" alt="Card" src="assets/p3.png" />
+        </ng-template>
+        <p>
+          Ensure that they attend online class, monitor their screens and get
+          reports about their activities
+        </p>
+      </p-card>
+    </li>
+    <li>
+      <p-card header="Get Updates via SMS" class="cardStyles">
+        <ng-template pTemplate="header">
+          <img class="imgCards" alt="Card" src="assets/p4.png" />
+        </ng-template>
+        <p>
+          Ensure that your child’s online class are monitored properly by you
+          and the school
+        </p>
+      </p-card>
+    </li>
+  </div>
+  <br />
+  <div class="demoHolder">
+    <button
+      (click)="demoRequest()"
+      pButton
+      type="button"
+      label="LEARN MORE"
+      class="demo-btn"
+    ></button>
+  </div>
+  <p-dialog
+    header="Request Demo"
+    [modal]="true"
+    [(visible)]="displayDemo"
+    class="dialogSize"
+  >
+    <app-demoform></app-demoform>
+  </p-dialog>
+  <br />
+</div>

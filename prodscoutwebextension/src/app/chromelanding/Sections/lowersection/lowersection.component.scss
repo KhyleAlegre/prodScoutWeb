@@ -1,0 +1,141 @@
+.main {
+   margin-top: 50px;
+
+   .labelLow {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+    @media only screen and (max-width: 480px) { 
+        .c1{
+            display: inline-block;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            .listView {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                li {
+                    font-size: 18px;
+                    list-style: none;
+                    text-align: center;
+                    margin-top: 15px;
+                 }
+            }
+           
+            .imgPeopleA {
+                height: 275px;
+                width: 265px;
+            }
+        }
+
+        .c2 {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            .listView {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                li {
+                    font-size: 18px;
+                    list-style: none;
+                    text-align: center;
+                    margin-top: 15px;
+                 }
+            }
+            .imgPeopleB {
+                height: 265px;
+                width: 265px;
+            }
+        }
+
+        .c3 {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            .listView {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                li {
+                    font-size: 18px;
+                    list-style: none;
+                    text-align: center;
+                    margin-top: 15px;
+                 }
+            }   
+            .imgPeopleC {
+                height: 310px;
+                width: 270px;
+            }
+
+        }
+
+
+    }
+
+    @media only screen and (min-width: 480px) {  
+        .c1{
+         
+            text-align: center;
+            
+            .listView {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                li {
+                    font-size: 18px;
+                    list-style: none;
+                    text-align: center;
+                    margin-top: 15px;
+                 }
+            }
+           
+            .imgPeopleA {
+                height: 375px;
+                width: 365px;
+            }
+        }
+
+        .c2 {
+            display: block;
+            text-align: center;
+            .listView {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                li {
+                    font-size: 18px;
+                    list-style: none;
+                    text-align: center;
+                    margin-top: 15px;
+                 }
+            }
+            .imgPeopleB {
+                height: 365px;
+                width: 365px;
+            }
+        }
+
+        .c3 {
+            display: block;
+            text-align: center;
+            .listView {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                li {
+                    font-size: 18px;
+                    list-style: none;
+                    text-align: center;
+                    margin-top: 15px;
+                 }
+            }
+            .imgPeopleC {
+                height: 410px;
+                width: 360px;
+            }
+
+        }
+        
+    }
+
+}

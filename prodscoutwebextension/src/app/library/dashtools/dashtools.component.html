@@ -1,0 +1,114 @@
+<div class="main">
+  <button
+    pButton
+    type="button"
+    label="Get Screenshot"
+    class="tool-btn"
+    (click)="requestSS()"
+  ></button>
+  <button
+    pButton
+    type="button"
+    label="View All Activity"
+    class="tool-btn p-button-help"
+    (click)="showLogs()"
+  ></button>
+  <button
+    pButton
+    type="button"
+    label="Send a Nudge (Browser Only)"
+    class="tool-btn p-button-warning"
+    (click)="sendNudgeNow()"
+  ></button>
+  <button
+    pButton
+    type="button"
+    label="Enable Strict Mode"
+    class="tool-btn"
+    (click)="setStrict()"
+  ></button>
+  <button
+    pButton
+    type="button"
+    label="Enable Holiday Mode"
+    class="tool-btn"
+    (click)="setHoliday()"
+  ></button>
+  <p-divider></p-divider>
+  <div class="field col-12 md:col-4">
+    <label for="icon">Monitoring Start Date</label>
+    <br />
+    <p-calendar
+      [(ngModel)]="startSession"
+      [showIcon]="true"
+      inputId="icon"
+      (onSelect)="getStartSession()"
+    ></p-calendar>
+    <br />
+    <label for="icon">Monitoring End Date</label>
+    <br />
+    <p-calendar
+      [(ngModel)]="endSession"
+      [showIcon]="true"
+      inputId="icon"
+      (onSelect)="getEndSession()"
+    ></p-calendar>
+    <br />
+    <br />
+    <button
+      pButton
+      type="button"
+      label="Schedule the Scouting"
+      class="tool-btn"
+      (click)="showScheduling()"
+    ></button>
+  </div>
+
+  <p-dialog
+    header="Alert"
+    [modal]="true"
+    [(visible)]="displayNoData"
+    class="dialogSize"
+  >
+    <div style="text-align: center">
+      <p-divider align="center" type="dashed"></p-divider>
+      <h1 style="color: #fd6169">Please select a profile first</h1>
+      <p-divider align="center" type="dashed"></p-divider>
+    </div>
+  </p-dialog>
+  <p-dialog
+    header="Alert"
+    [modal]="true"
+    [(visible)]="displayNudge"
+    class="dialogSize"
+  >
+    <div style="text-align: center">
+      <p-divider align="center" type="dashed"></p-divider>
+      <h1 style="color: #fd6169">
+        We let {{ profileName }} knew that you've sent a nudge.
+      </h1>
+      <p-divider align="center" type="dashed"></p-divider>
+    </div>
+  </p-dialog>
+  <p-dialog
+    header="Alert"
+    [modal]="true"
+    [(visible)]="displaySS"
+    class="dialogSize"
+  >
+    <div style="text-align: center">
+      <p-divider align="center" type="dashed"></p-divider>
+      <h1 style="color: #fd6169">Screenshot has been requested.</h1>
+      <p-divider align="center" type="dashed"></p-divider>
+    </div>
+  </p-dialog>
+
+  <p-dialog
+    header="Logs"
+    [modal]="true"
+    [(visible)]="displayLogs"
+    class="dialogSize"
+  >
+    <app-profilelogs></app-profilelogs>
+  </p-dialog>
+</div>

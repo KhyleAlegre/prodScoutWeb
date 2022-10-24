@@ -1,0 +1,57 @@
+<div class="main">
+  <div class="c1">
+    <img class="sideImg" src="assets/fam1.png" />
+  </div>
+  <div class="c2">
+    <div class="landingLabel">
+      The multi-platform
+      <b style="color: #256d85">parental monitoring</b> solutions for parents
+      and schools.
+    </div>
+    <div class="button">
+      <button
+        (click)="showDemo()"
+        pButton
+        type="button"
+        label="Start Demo"
+        class="demo-btn"
+      ></button>
+      <p-dialog
+        header="I want to try your"
+        [modal]="true"
+        [(visible)]="displayDemo"
+        class="dialogSize"
+      >
+        <li>
+          <b> prodScout - DeskBuddy (Desktop)</b>
+        </li>
+        <li>
+          <b> prodScout - Mobilo (Mobile)</b>
+        </li>
+        <li>
+              <b> prodScout - Webby (Web Extension)</b>
+        </li>
+      </p-dialog>
+    </div>
+    <div class="appPlatform">
+      <br />
+      <label> Available For:</label>
+      <br />
+      <li>
+        <img alt="logo" class="iconApps" src="assets/desktopapp.png" />
+        <br />
+        <span class="appSelect">Desktop</span>
+      </li>
+      <li>
+        <img alt="logo" class="iconApps" src="assets/webapp.png" />
+        <br />
+        <span class="appSelect">Browser</span>
+      </li>
+      <li>
+        <img alt="logo" class="iconApps" src="assets/mobileapp.png" />
+        <br />
+        <span class="appSelect">Mobile</span>
+      </li>
+    </div>
+  </div>
+</div>

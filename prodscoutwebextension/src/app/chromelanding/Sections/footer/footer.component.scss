@@ -1,0 +1,37 @@
+.main {
+    height: 200px;
+    background-color: #393939;
+    .productLogo {
+        text-align: center;
+    }
+
+    @media only screen and (max-width: 480px) {
+        .imgFooter {
+            margin-top: 20px;
+            height: 50px;
+            width: 220px;
+            cursor: pointer;
+        }
+
+        .devs {
+            text-align: center;
+            color:#FAFAFA;
+            font-size: 14px;
+        }
+
+    }
+    @media only screen and (min-width: 480px) {
+        .imgFooter {
+            margin-top: 20px;
+            height: 80px;
+            width: 350px;
+            cursor: pointer;
+        }
+
+        .devs {
+            text-align: center;
+            color:#FAFAFA;
+        }
+    }
+    
+}

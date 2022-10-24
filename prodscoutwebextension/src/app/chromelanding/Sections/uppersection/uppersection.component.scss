@@ -1,0 +1,129 @@
+.main {
+  display: grid;
+
+  @media only screen and (max-width: 480px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 380px;
+    .c1 {
+      grid-column: 1/2;
+      grid-row: 1/2;
+
+      .sideImg {
+        visibility: hidden;
+        display: none;
+      }
+    }
+
+    .c2 {
+      grid-column: 1/2;
+      grid-row: 1/2;
+      text-align: center;
+
+      .landingLabel {
+        font-size: 34px;
+      }
+
+      .appPlatform {
+        label {
+          font-size: 18px;
+        }
+        li {
+          display: inline-block;
+          margin: 20px;
+          list-style: none;
+        }
+
+        .iconApps {
+          height: 40px;
+          width: 40px;
+        }
+
+        .appSelect {
+          font-size: 20px;
+          font-weight: bold;
+        }
+      }
+
+      .button {
+        li {
+          list-style: none;
+          margin: 10px;
+          font-size: 14px;
+          font-weight: bold;
+        }
+        .dialogSize {
+          width: 75vw;
+        }
+      }
+    }
+  }
+
+  @media only screen and (min-width: 480px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+
+    .c1 {
+      grid-column: 1/2;
+      grid-row: 1/2;
+
+      .sideImg {
+        height: 650px;
+        width: 650px;
+        margin-left: 5%;
+      }
+    }
+
+    .c2 {
+      grid-column: 2/3;
+      grid-row: 1/2;
+
+      .landingLabel {
+        font-size: 50px;
+        margin-top: 80px;
+      }
+    }
+
+    .appPlatform {
+      label {
+        font-size: 18px;
+        margin-left: 5px;
+      }
+
+      li {
+        margin: 20px;
+        display: inline-block;
+        list-style: none;
+        text-align: center;
+      }
+      .iconApps {
+        height: 64px;
+        width: 64px;
+      }
+
+      .appSelect {
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
+
+    .button {
+      li {
+        list-style: none;
+        margin: 10px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .dialogSize {
+        width: 50vw;
+      }
+    }
+  }
+
+  .demo-btn {
+    margin-top: 20px;
+    background: #256d85;
+    color: #fff;
+  }
+}

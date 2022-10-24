@@ -1,0 +1,66 @@
+.main {
+  text-align: center;
+
+  .profileImageContainer {
+    text-align: center;
+    margin: 15px;
+  }
+
+  .profileContainer {
+    .input-form-standard {
+      margin-bottom: 8px;
+    }
+  }
+
+  .passwordDlog {
+    @media only screen and (max-width: 480px) {
+      .dxS {
+        width: 80vw;
+      }
+    }
+    @media only screen and (min-width: 480px) {
+      .dxS {
+        width: 40vw;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .profileImage {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 30px;
+      border: solid 1px #e1e1e1;
+      cursor: pointer;
+      margin: 20px;
+    }
+
+    .profileContainer {
+      margin: 50px;
+    }
+  }
+
+  @media only screen and (min-width: 480px) {
+    .profileImage {
+      width: 8rem;
+      height: 8rem;
+      border-radius: 30px;
+      border: solid 1px #e1e1e1;
+      cursor: pointer;
+    }
+    .profileContainer {
+      margin-left: 100px;
+      margin-right: 100px;
+      margin-top: 10px;
+    }
+  }
+
+  .updateSuccess {
+    text-align: center;
+    label {
+      font-size: 18px;
+      font-weight: bold;
+      color: #256d85;
+    }
+  }
+}

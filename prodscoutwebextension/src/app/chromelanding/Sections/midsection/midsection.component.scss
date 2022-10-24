@@ -1,0 +1,82 @@
+.main {
+    background-color: #8FE3CF;
+    @media only screen and (max-width: 480px) { 
+        .midLabel {
+            text-align: center;
+            label {
+                font-size: 32px;
+            }
+        }
+
+        .displayCards {
+            text-align: center;
+            
+            li {
+                margin: 15px;
+                list-style: none;
+            }
+
+            .cardStyles {
+                width: 20rem;
+                margin-bottom: 1rem;
+            }
+
+            
+        }
+
+        .demoHolder {
+            text-align: center; 
+        }
+
+        .dialogSize {
+            width: 80vw;
+        }
+
+    }
+
+    @media only screen and (min-width: 480px) { 
+        .midLabel {
+            text-align: center;
+            label {
+                font-size: 38px;
+            }
+        }
+
+        .displayCards {
+          
+            text-align: center;
+            height: auto;
+            li {
+                display: inline-block;
+                list-style: none;
+                margin: 10px;
+                width: 260px;
+            }
+    
+            .imgCards {
+                height: 320px;
+                width: 280px;
+            }
+
+            p {
+                margin-left: 2%;
+                margin-right: 2%;
+                text-size-adjust: auto;
+            }
+        }
+        .demoHolder {
+            text-align: center;
+        }
+
+        .dialogSize {
+            width: 65vw;
+        }
+    }
+
+    .demo-btn {
+        margin: 5px; 
+        border: solid 1px #256D85;
+        background: #fff;
+        color: #256D85;
+    }
+}
