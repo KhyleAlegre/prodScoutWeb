@@ -10,6 +10,8 @@ import { EventwatcherComponent } from './core/watcher/eventwatcher/eventwatcher.
 import { LgosComponent } from './library/lgos/lgos.component';
 import { ManageprofilesComponent } from './library/manageprofiles/manageprofiles.component';
 import { BlacklistComponent } from './library/blacklist/blacklist.component';
+import { AdminComponent } from './authentication/admin/admin.component';
+import { AdmindashboardComponent } from './core/admindashboard/admindashboard.component';
 //Dashboard - Parent
 
 // Parent Routes / Main Routes
@@ -20,10 +22,12 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'myprofile', component: MyprofileComponent },
   { path: 'watcher', component: WatcherComponent },
-  { path: 'event-watcher', component: EventwatcherComponent },
+  { path: 'blocked', component: EventwatcherComponent },
   { path: 'profiles', component: ManageprofilesComponent },
   { path: 'blacklist', component: BlacklistComponent },
   { path: 'logs', component: LgosComponent },
+  { path: 'rabbithole', component: AdminComponent },
+  { path: 'admin', component: AdmindashboardComponent },
 ];
 
 @NgModule({

@@ -1,0 +1,61 @@
+.main {
+  margin-left: 120px;
+  margin-right: 120px;
+
+  .loginContainer {
+    border: solid 1px #e1e1e1;
+    margin: 250px;
+    padding: 30px;
+    .input-form-standard {
+      width: 100%;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .forgotPassword {
+      margin-top: 5px;
+      font-weight: bold;
+      color: #256d85;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .signup-btn {
+      background: #256d85;
+      color: #fff;
+      width: 100%;
+    }
+
+    .invalid {
+      text-align: center;
+      color: red;
+      font-weight: bold;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #256d85;
+      text-align: center;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .loginContainer {
+      visibility: hidden;
+      display: none;
+    }
+
+    .mobileContainer {
+      margin-top: 100px;
+
+      padding: 20px;
+    }
+  }
+
+  @media only screen and (min-width: 480px) {
+    .mobileContainer {
+      visibility: hidden;
+      display: none;
+    }
+  }
+}

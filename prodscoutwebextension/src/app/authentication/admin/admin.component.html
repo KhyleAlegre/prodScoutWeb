@@ -1,1 +1,59 @@
-<p>admin works!</p>
+<div class="main">
+  <div class="loginContainer">
+    <h2 style="margin-left: 5px; text-align: center">
+      Hello There! The Rabbit Hole is Open
+    </h2>
+    <br />
+    <h5>
+      Username
+      <sup *ngIf="noUser" style="font-size: 10px; color: red">{{
+        userPrompt
+      }}</sup>
+    </h5>
+    <input
+      type="text"
+      pInputText
+      [(ngModel)]="username"
+      class="input-form-standard"
+    />
+    <br />
+    <h5>
+      Password
+      <sup *ngIf="noPassword" style="font-size: 10px; color: red">{{
+        pwPrompt
+      }}</sup>
+    </h5>
+    <input
+      type="password"
+      pInputText
+      [(ngModel)]="password"
+      class="input-form-standard"
+    />
+    <div class="invalid" *ngIf="invalidLogin">
+      Hi! Unfortunately your credentials doesn't match, please try again.
+    </div>
+    <br />
+    <br />
+    <button
+      pButton
+      type="button"
+      label="LOG IN"
+      (click)="logIn()"
+      class="signup-btn"
+    ></button>
+    <br />
+    <br />
+    <div class="footer">2022 - prodScout | All Rights Reserve</div>
+  </div>
+
+  <div class="mobileContainer">
+    <br />
+    <br />
+    <br />
+    <h2>Please access your dashboard in a secure desktop environment</h2>
+    <br />
+    <h3 style="color: brown">
+      Mobile Access gives you very limited privelleges
+    </h3>
+  </div>
+</div>

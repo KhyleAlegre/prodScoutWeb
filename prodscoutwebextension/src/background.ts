@@ -41,39 +41,19 @@ var SSRequest: boolean = false;
 var startSession: any;
 var endSession: any;
 var sessionDate: any;
-//Load Profile
 
+//Load Profile
 chrome.runtime.onInstalled.addListener(() => {
-  // create alarm after extension is installed / upgraded
+  // creates an alarm after extension is installed / upgraded
   // Ensures that user data is being loaded // It will take at least 1 minute to sync the data from the server
   // This is the current limitation of the app and the server due to the current pricing package availed for this project
-  chrome.alarms.create('Timely Check', { periodInMinutes: 1 });
-});
-
-// Screenshot taker
-chrome.runtime.onStartup.addListener(() => {
-  chrome.storage.sync.get(['Profile'], function (result) {
-    profileId = result['Profile'];
-    console.log(profileId);
-  });
-  chrome.storage.sync.get(['Password'], function (result) {
-    password = result['Password'];
-    console.log(password);
-  });
-  // Fetch the username / useraccount Id
-  getFirestore();
-  getBlackList();
-  // This tell our App to take screen shot for every 10 minutes (this can be configured)
-  chrome.alarms.create('Screen Shot Taker', {
-    periodInMinutes: randomInterval,
-  });
-  getRandomSS();
+  chrome.alarms.create('Run Time', { periodInMinutes: 1 });
 });
 
 // Data Validator, since this is running independently on our app, we need to
 // run this every time to ensure credentials and status are being authenticated properly
 chrome.alarms.onAlarm.addListener(() => {
-  helloWorld();
+  welcomeNotification();
 
   chrome.storage.sync.get(['Profile'], function (result) {
     profileId = result['Profile'];
@@ -84,22 +64,17 @@ chrome.alarms.onAlarm.addListener(() => {
   // Fetch the username / useraccount Id
   getFirestore();
   getBlackList();
+
+  // Gets Random Screenshot
+  setInterval(() => {
+    getScreenshot();
+  }, 900000);
 });
 
-// Any changes on the tab
+// Detects any changes on the tab
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-  checkCreds();
   getFirestore();
   getBlackList();
-  eventTimeStamp = new Date();
-  event.add({
-    profileName: profileId,
-    userName: creds,
-    logDate: eventTimeStamp,
-    eventDetails: 'Current site was changed',
-    isIncognito: tab.incognito,
-  });
-
   if (strictMode == true) {
     eventTimeStamp = new Date();
     event.add({
@@ -109,10 +84,11 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
       eventDetails: 'Url Change Detected',
       isIncognito: tab.incognito,
     });
-
+    // Checks Tab Information
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tab) => {
       let url = tab[0].url;
       let title = tab[0].title;
+      let tbxId = tab[0].id;
       // Add Logs
       eventTimeStamp = new Date();
       event.add({
@@ -134,7 +110,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
           sessionTimeStamp = new Date();
           session.add({
             deviceType: 'Browser',
-            sessionMode: 'Switched Tab to: ' + url,
+            sessionMode: 'Changed Tab to: ' + url,
             sessionStatus: true,
             photoUrl: '',
             sessiongLogDate: sessionTimeStamp,
@@ -150,42 +126,17 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
           });
 
           //SMS API
-        }
-      }
-    });
-  }
 
-  if (holidayMode == true) {
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tab) => {
-      let url = tab[0].url;
-      let title = tab[0].title;
-
-      for (let i = 0; i < blackList.length; i++) {
-        if (url == blackList[i].samplesite) {
-          // Takes Screenshot
           setTimeout(() => {
-            getScreenshot();
-          }, 100);
-          // Add Session Event
-          sessionTimeStamp = new Date();
-          session.add({
-            deviceType: 'Browser',
-            sessionMode: 'Switched Tab to: ' + url,
-            sessionStatus: true,
-            photoUrl: '',
-            sessiongLogDate: sessionTimeStamp,
-            displaySessionDate: sessionTimeStamp.toLocaleDateString(),
-            displaySessionTime: sessionTimeStamp.toLocaleTimeString('en-US'),
-            profileId: profileId,
-            profileType: 'Regular',
-            violationLevel: 'Black List Site',
-            screenShotTrigger: '',
-            profileStatus: 'Active',
-            profilePassword: password,
-            username: creds,
-          });
+            let redirectUrl = { url: 'https://prodscout.vercel.app/#/blocked' };
+            chrome.tabs.query({ currentWindow: true, active: true }, () => {
+              chrome.tabs.update(tabId, redirectUrl);
+            });
 
-          //SMS API
+            chrome.tabs.update(tabId, {
+              url: 'https://prodscout.vercel.app/#/blocked',
+            });
+          }, 2000);
         }
       }
     });
@@ -218,41 +169,7 @@ chrome.tabs.onActivated.addListener(function (tab) {
           setTimeout(() => {
             getScreenshot();
           }, 100);
-          // Add Session Event
-          sessionTimeStamp = new Date();
-          session.add({
-            deviceType: 'Browser',
-            sessionMode: 'Switched Tab to: ' + url,
-            sessionStatus: true,
-            photoUrl: '',
-            sessiongLogDate: sessionTimeStamp,
-            displaySessionDate: sessionTimeStamp.toLocaleDateString(),
-            displaySessionTime: sessionTimeStamp.toLocaleTimeString('en-US'),
-            profileId: profileId,
-            profileType: 'Regular',
-            violationLevel: 'Black List Site',
-            screenShotTrigger: '',
-            profileStatus: 'Active',
-            profilePassword: password,
-            username: creds,
-          });
 
-          //SMS API
-        }
-      }
-    });
-  }
-
-  if (holidayMode == true) {
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tab) => {
-      let url = tab[0].url;
-
-      for (let i = 0; i < blackList.length; i++) {
-        if (url == blackList[i].samplesite) {
-          // Takes Screenshot
-          setTimeout(() => {
-            getScreenshot();
-          }, 100);
           // Add Session Event
           sessionTimeStamp = new Date();
           session.add({
@@ -280,7 +197,6 @@ chrome.tabs.onActivated.addListener(function (tab) {
 });
 // Checks if you created a new tab
 chrome.tabs.onCreated.addListener(function (tab) {
-  checkCreds();
   getFirestore();
   getBlackList();
 
@@ -303,6 +219,7 @@ chrome.tabs.onCreated.addListener(function (tab) {
           setTimeout(() => {
             getScreenshot();
           }, 100);
+
           // Add Session Event
           sessionTimeStamp = new Date();
           session.add({
@@ -327,18 +244,14 @@ chrome.tabs.onCreated.addListener(function (tab) {
       }
     });
   }
-
-  if (holidayMode == true) {
-  }
 });
+
+//***********FUNCTIONS ***** */
 // Intro (for Devs and Checking Only)
-function helloWorld() {
+function welcomeNotification() {
   console.log('We are Scouting You');
 }
-// Checks credentials repeatedly
-function checkCreds() {
-  console.log(profileId, password, creds);
-}
+
 // Get Profile Data
 async function getFirestore() {
   const snapshot = await afs
@@ -358,6 +271,7 @@ async function getFirestore() {
   checkSS();
   checkSchedule();
 }
+
 // Loads the blacklisted site from the server
 async function getBlackList() {
   const list = await afs
@@ -366,17 +280,21 @@ async function getBlackList() {
     .get();
   blackList = list.docs.map((doc) => doc.data());
 }
+
 // Takes Screenshots
 function getScreenshot() {
   chrome.tabs.captureVisibleTab((data) => {
     ssUrl = data;
     console.log('screenshot', ssUrl);
-    ssPathName = 'sessionSS' + Math.random();
-    const storage = getStorage();
-    imageRef = ref(storage, ssPathName);
-    imageBaseRef = uploadBytes(imageRef, ssUrl);
+    localStorage.setItem('dataUrl', ssUrl);
+    // Set Storage for the meantime
+    //  ssPathName = 'sessionSS' + Math.random();
+    // const storage = getStorage();
+    // imageRef = ref(storage, ssPathName);
+    //imageBaseRef = uploadBytes(imageRef, ssUrl);
   });
 }
+
 // Shows Nudge
 function checkNudge() {
   if (nudgeRequest == true) {
@@ -390,6 +308,7 @@ function checkNudge() {
     chrome.notifications.clear('Nudge');
   }
 }
+
 // Get SS
 function checkSS() {
   if (SSRequest == true) {
@@ -397,10 +316,9 @@ function checkSS() {
     getScreenshot();
   }
 }
+
 // Set Schedule
 function checkSchedule() {
-  console.log(startSession);
-  console.log(endSession);
   if (startSession == '' || endSession == '') {
     console.log('Holiday Mode');
     holidayMode = true;
@@ -408,7 +326,6 @@ function checkSchedule() {
     sessionDate = new Date();
     startSession = new Date(startSession);
     endSession = new Date(endSession);
-
     startSession.setHours(0, 0, 0, 0);
     endSession.setHours(23, 59, 59, 59);
 
@@ -419,12 +336,7 @@ function checkSchedule() {
 
     if (sessionDate < endSession) {
       strictMode = true;
+      console.log('Strict Mode is in Scheduled');
     }
   }
 }
-
-// Get Random SS
-
-function getRandomSS() {}
-// Bucket Endpoint >> prodscout-90022.appspot.com
-// Create a notification icon

@@ -61,10 +61,6 @@
       }
 
       .tableValues {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr;
-
         .c1 {
           grid-column: 1/2;
           grid-row: 1/2;

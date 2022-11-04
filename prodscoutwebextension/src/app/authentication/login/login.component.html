@@ -42,7 +42,16 @@
     ></button>
     <br />
     <br />
-    <div class="forgotPassword">Forgot Your Password?</div>
+    <div class="forgotPassword" (click)="showForgotPW()">
+      Forgot Your Password?
+    </div>
+    <p-dialog
+      header="Change Password"
+      [(visible)]="displayForgot"
+      [style]="{ width: '80vw', height: '80vw' }"
+    >
+      <app-changepw></app-changepw>
+    </p-dialog>
     <p-divider align="center" type="dashed" class="isMobile">
       <b>Don't have an account yet?</b>
     </p-divider>

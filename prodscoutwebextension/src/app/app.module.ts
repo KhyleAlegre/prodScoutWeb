@@ -38,6 +38,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 import { UppersectionComponent } from './chromelanding/Sections/uppersection/uppersection.component';
 import { MidsectionComponent } from './chromelanding/Sections/midsection/midsection.component';
@@ -62,6 +64,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BlacklistComponent } from './library/blacklist/blacklist.component';
 import { LgosComponent } from './library/lgos/lgos.component';
 import { ManageprofilesComponent } from './library/manageprofiles/manageprofiles.component';
+import { AdmindashboardComponent } from './core/admindashboard/admindashboard.component';
+import { ChangepwComponent } from './library/changepw/changepw.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +93,8 @@ import { ManageprofilesComponent } from './library/manageprofiles/manageprofiles
     BlacklistComponent,
     LgosComponent,
     ManageprofilesComponent,
+    AdmindashboardComponent,
+    ChangepwComponent,
   ],
   imports: [
     BrowserModule,
@@ -121,6 +127,8 @@ import { ManageprofilesComponent } from './library/manageprofiles/manageprofiles
     Ng2SearchPipeModule,
     DropdownModule,
     InputSwitchModule,
+    ProgressSpinnerModule,
+    ProgressBarModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],

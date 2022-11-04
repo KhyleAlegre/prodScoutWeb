@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   email: any;
   password: any;
   displayRegister: boolean = false;
+  displayForgot: boolean = false;
   noEmail: boolean = false;
   noPassword: boolean = false;
   invalidLogin: boolean = false;
@@ -45,6 +46,9 @@ export class LoginComponent implements OnInit {
     this.displayRegister = true;
   }
 
+  showForgotPW() {
+    this.displayForgot = true;
+  }
   logIn() {
     if (!this.email) {
       this.noEmail = true;

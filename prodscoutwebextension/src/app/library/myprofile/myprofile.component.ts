@@ -176,6 +176,14 @@ export class MyprofileComponent implements OnInit {
       password: this.newPassword,
     });
 
+    this.users.subscribe(
+      (data) => (
+        (this.userCredentials = data),
+        localStorage.setItem('userData', JSON.stringify(this.userCredentials)),
+        window.location.reload()
+      )
+    );
+
     this.displayUpdateSuccess = true;
     this.newPassword = '';
     this.oldPassword = '';

@@ -1,0 +1,74 @@
+<div class="main">
+  <div class="forgot" *ngIf="showMain">
+    <div class="spinner">
+      <p-progressSpinner
+        *ngIf="showSpinner"
+        [style]="{ width: '150px', height: '150px' }"
+      ></p-progressSpinner>
+    </div>
+    <h2 style="margin-left: 5px; text-align: center">Forgot Password</h2>
+    <br />
+    <h5>
+      Enter your registered email
+      <sup *ngIf="noEmail" style="font-size: 10px; color: red">{{
+        emailPrompt
+      }}</sup>
+    </h5>
+    <input
+      type="text"
+      pInputText
+      [(ngModel)]="email"
+      class="input-form-standard"
+    />
+    <br />
+    <h5>
+      Enter your username
+      <sup *ngIf="noUser" style="font-size: 10px; color: red">{{
+        userPrompt
+      }}</sup>
+    </h5>
+    <input
+      type="text"
+      pInputText
+      [(ngModel)]="username"
+      class="input-form-standard"
+    />
+    <br />
+    <div *ngIf="invalidCreds" class="invalid">
+      Hi! Unfortunately your credentials doesn't match, please try again.
+    </div>
+    <br />
+    <button
+      pButton
+      type="button"
+      label="Submit"
+      (click)="getChangePW()"
+      class="signup-btn"
+    ></button>
+    <br />
+    <br />
+  </div>
+  <div *ngIf="showGenPage" class="genPage">
+    <h5>
+      This is your new password, please copy the details and use this generated
+      password to login to your updated account
+    </h5>
+    <br />
+    <input
+      id="pwGX"
+      type="text"
+      pInputText
+      [(ngModel)]="genPassword"
+      class="input-form-standard"
+    />
+    <br />
+    <br />
+    <button
+      pButton
+      type="button"
+      label="Update Password"
+      (click)="copyPw()"
+      class="signup-btn"
+    ></button>
+  </div>
+</div>
