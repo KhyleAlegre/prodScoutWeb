@@ -1,0 +1,74 @@
+.main {
+  margin: 10px;
+
+  @media only screen and (max-width: 480px) {
+    margin-left: 5px;
+    margin-right: 5px;
+
+    .titleContainer {
+      text-align: center;
+
+      .imageLog {
+        margin: 5px;
+        height: 80px;
+        width: 80px;
+      }
+    }
+
+    .selectProfile {
+      text-align: center;
+      .input-select-normal {
+        font-size: 24px;
+        border-color: #8fe3cf;
+        height: 40px;
+        width: 80%;
+      }
+    }
+
+    .galleryWall {
+      text-align: center;
+      margin: 5px;
+      text-align: center;
+      .imageContainer {
+        margin: 5;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 480px) {
+    margin-left: 100px;
+    margin-right: 100px;
+
+    .titleContainer {
+      text-align: center;
+
+      .imageLog {
+        margin: 5px;
+        height: 120px;
+        width: 120px;
+      }
+    }
+
+    .selectProfile {
+      text-align: center;
+      .input-select-normal {
+        font-size: 18px;
+        border-color: #8fe3cf;
+        height: 40px;
+        width: 60%;
+      }
+    }
+    border: solid 1px #e1e1e1;
+    border-radius: 5px;
+
+    .galleryWall {
+      margin: 10px;
+      display: inline-block;
+      .imageContainer {
+        text-align: center;
+        margin: 5;
+      }
+      border-bottom: 10px;
+    }
+  }
+}

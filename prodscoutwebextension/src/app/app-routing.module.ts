@@ -12,6 +12,8 @@ import { ManageprofilesComponent } from './library/manageprofiles/manageprofiles
 import { BlacklistComponent } from './library/blacklist/blacklist.component';
 import { AdminComponent } from './authentication/admin/admin.component';
 import { AdmindashboardComponent } from './core/admindashboard/admindashboard.component';
+import { GalleryComponent } from './library/gallery/gallery.component';
+import { AdminLogsComponent } from './core/admin-logs/admin-logs.component';
 //Dashboard - Parent
 
 // Parent Routes / Main Routes
@@ -28,6 +30,8 @@ const routes: Routes = [
   { path: 'logs', component: LgosComponent },
   { path: 'rabbithole', component: AdminComponent },
   { path: 'admin', component: AdmindashboardComponent },
+  { path: 'gallery', component: GalleryComponent },
+  { path: 'adminLogs', component: AdminLogsComponent },
 ];
 
 @NgModule({

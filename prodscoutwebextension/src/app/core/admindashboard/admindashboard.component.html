@@ -2,10 +2,10 @@
   <div class="searchbox">
     <div class="searchInput">
       <input
-        type="password"
+        type="text"
         pInputText
-        placeholder="Search.."
-        [(ngModel)]="filter"
+        placeholder="Search Details.."
+        [(ngModel)]="filterUser"
         class="input-form-standard"
       />
     </div>
@@ -15,28 +15,29 @@
         Hi!
         {{ username }}
       </h2>
-      <div class="date">
-        {{ displayDate }}
-      </div>
-      <div class="buttonLg">
-        <button
-          pButton
-          type="button"
-          label="Update Password"
-          class="updt-btn"
-          (click)="logOut()"
-        ></button>
-      </div>
+    </div>
+    <div class="date">
+      {{ displayDate }}
+    </div>
+    <div class="buttonLg">
+      <button
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-sign-out"
+        class="p-button-rounded p-button-secondary p-button-text"
+        (click)="logOut()"
+      ></button>
     </div>
   </div>
 
   <div class="cardbox">
     <div class="card">
-      <div class="users">Total Users:</div>
+      <div class="users">Total Users: {{ totalUsers }}</div>
     </div>
 
     <div class="card">
-      <div class="profiles">Total Profiles:</div>
+      <div class="profiles">Total Profiles: {{ totalProfiles }}</div>
     </div>
 
     <div class="card">
@@ -46,6 +47,7 @@
           type="button"
           label="View Logs"
           class="view-btn"
+          (click)="openLogs()"
         ></button>
       </div>
     </div>
@@ -53,15 +55,8 @@
 
   <div class="tableData">
     <div class="dataTable">
-      <div class="searchbar">
-        <input
-          type="password"
-          pInputText
-          placeholder="Search Details.."
-          [(ngModel)]="filterUser"
-          class="input-form-standard"
-        />
-      </div>
+      <h3 style="margin-left: 10px">User List</h3>
+
       <div class="userTable">
         <div class="headerDtx">
           <div class="h1">First Name</div>
@@ -69,20 +64,59 @@
           <div class="h3">Email</div>
           <div class="h4">Contact</div>
           <div class="h5">Role</div>
+          <div class="h6">Actions</div>
         </div>
-        <div class="Dtx" *ngFor="let users of userList">
+        <div class="Dtx" *ngFor="let users of userList | filter: filterUser">
           <div class="c1">{{ users.firstName }}</div>
           <div class="c2">{{ users.lastName }}</div>
           <div class="c3">{{ users.email }}</div>
           <div class="c4">{{ users.contactNo }}</div>
           <div class="c5">{{ users.role }}</div>
+          <div class="c6">
+            <button
+              type="submit"
+              class="table-btn"
+              (click)="loadDetails(users)"
+            >
+              Select
+            </button>
+          </div>
         </div>
       </div>
     </div>
     <div class="dataMenu">
       <br />
-      <label style="font-weight: bold; font-size: 16px">Update Password:</label>
+      <label style="font-weight: bold; font-size: 16px">Update Email:</label>
       <br />
+      <input
+        type="text"
+        pInputText
+        [(ngModel)]="userEmail"
+        class="input-form-standard"
+      />
+      <br />
+      <sup
+        *ngIf="noNull"
+        style="font-size: 12px; color: red; font-style: italic"
+        >Fields should not be empty</sup
+      >
+      <br />
+      <label style="font-weight: bold; font-size: 16px">Update Contact:</label>
+      <br />
+      <input
+        type="text"
+        pInputText
+        [(ngModel)]="userContact"
+        class="input-form-standard"
+      />
+      <br />
+      <sup
+        *ngIf="noNull"
+        style="font-size: 12px; color: red; font-style: italic"
+        >Fields should not be empty</sup
+      >
+      <br />
+      <label style="font-weight: bold; font-size: 16px">Update Password:</label>
       <br />
       <input
         type="text"
@@ -91,13 +125,24 @@
         class="input-form-standard"
       />
       <br />
+      <sup
+        *ngIf="noNull"
+        style="font-size: 12px; color: red; font-style: italic"
+        >Fields should not be empty</sup
+      >
+      <label style="font-size: 18px; color: #5f9df7">{{ updatePrompt }}</label>
+      <br />
       <br />
       <button
         pButton
         type="button"
-        label="Update Password"
+        label="Update Details"
         class="updt-btn"
+        (click)="updateDetails()"
       ></button>
+      <br />
+      <br />
+      <br />
     </div>
   </div>
 </div>

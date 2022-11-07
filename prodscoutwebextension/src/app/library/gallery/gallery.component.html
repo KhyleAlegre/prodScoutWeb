@@ -1,0 +1,53 @@
+<div class="main">
+  <div class="titleContainer">
+    <img class="imageLog" src="assets/xw.png" />
+    <h2>Screenshot Gallery</h2>
+  </div>
+  <br />
+  <div style="text-align: center">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Back to Dashboard"
+      (click)="backtoDb()"
+    ></button>
+  </div>
+  <br />
+  <div class="selectProfile">
+    <h3>Select a Profile</h3>
+    <br />
+    <select
+      class="input-select-normal"
+      name="profileSelect"
+      [(ngModel)]="selectedProfile"
+      (change)="getGallery()"
+    >
+      <option
+        *ngFor="let profile of profileList"
+        value="{{ profile.profileId }}"
+      >
+        {{ profile.profileId }} {{ profile.lastName }}
+      </option>
+    </select>
+  </div>
+
+  <div class="galleryWall" *ngFor="let gallery of galleryList">
+    <div class="imageContainer">
+      <p-image
+        [src]="gallery.ssUrl"
+        alt="Image"
+        width="180"
+        height="100"
+        [preview]="true"
+      ></p-image>
+      <br />
+      <label>{{
+        gallery.logDate.toDate() | date: "yyyy/MM/dd h:mm:ss a"
+      }}</label>
+    </div>
+  </div>
+  <br />
+  <br />
+  <br />
+</div>

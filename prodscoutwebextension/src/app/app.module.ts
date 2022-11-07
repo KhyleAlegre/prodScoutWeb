@@ -66,6 +66,8 @@ import { LgosComponent } from './library/lgos/lgos.component';
 import { ManageprofilesComponent } from './library/manageprofiles/manageprofiles.component';
 import { AdmindashboardComponent } from './core/admindashboard/admindashboard.component';
 import { ChangepwComponent } from './library/changepw/changepw.component';
+import { GalleryComponent } from './library/gallery/gallery.component';
+import { AdminLogsComponent } from './core/admin-logs/admin-logs.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +97,8 @@ import { ChangepwComponent } from './library/changepw/changepw.component';
     ManageprofilesComponent,
     AdmindashboardComponent,
     ChangepwComponent,
+    GalleryComponent,
+    AdminLogsComponent,
   ],
   imports: [
     BrowserModule,

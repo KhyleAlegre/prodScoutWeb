@@ -65,6 +65,13 @@ export class DashboardComponent implements OnInit {
         ],
       },
       {
+        label: 'Screenshot Gallery',
+        icon: 'pi pi-images',
+        command: () => {
+          this.router.navigateByUrl('/gallery');
+        },
+      },
+      {
         label: 'Logs',
         icon: 'pi pi-fw pi-calendar',
         command: () => {

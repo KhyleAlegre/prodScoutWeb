@@ -1,0 +1,68 @@
+<div class="main">
+  <div class="titleContainer">
+    <img class="imageLog" src="assets/l1.png" />
+    <h2>View Logs - Admin</h2>
+  </div>
+  <br />
+  <div style="text-align: center">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Back to Dashboard"
+      (click)="backtoDb()"
+    ></button>
+  </div>
+  <br />
+  <div class="selectProfile">
+    <h3>Select a Profile</h3>
+    <br />
+    <select
+      class="input-select-normal"
+      name="profileSelect"
+      [(ngModel)]="selectedProfile"
+      (change)="getProfileLogs()"
+    >
+      <option
+        *ngFor="let profile of profileList"
+        value="{{ profile.profileId }}"
+      >
+        {{ profile.profileId }} {{ profile.lastName }}
+      </option>
+    </select>
+  </div>
+
+  <div class="searchbox">
+    <label>Search Details:</label>
+    <br />
+
+    <input
+      type="text"
+      pInputText
+      placeholder="Type Details Here"
+      [(ngModel)]="filterValue"
+      [style]="{ width: '98%' }"
+    />
+  </div>
+  <div class="logTable">
+    <div class="tableHeader">
+      <div class="h1">
+        <b>Activity</b>
+      </div>
+      <div class="h2">
+        <b>Timestamp</b>
+      </div>
+    </div>
+    <div
+      class="tableValues"
+      *ngFor="let events of eventList | filter: filterValue"
+    >
+      <div class="c1">
+        {{ events.eventDetails }}
+      </div>
+      <div class="c2">
+        {{ events.logDate.toDate() | date: "yyyy/MM/dd h:mm:ss a" }}
+      </div>
+    </div>
+  </div>
+</div>
