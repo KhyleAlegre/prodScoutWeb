@@ -36,6 +36,11 @@ export class RegisterComponent implements OnInit {
   fnCode: any;
   lnCode: any;
   rgx: any;
+  chx: any;
+  isAphx: boolean = false;
+  aphxPrompt: any;
+  isMinChar: boolean = false;
+  minCharPrompt: any;
 
   // Workers
   noEmptyField: any;
@@ -48,16 +53,44 @@ export class RegisterComponent implements OnInit {
   postSMSApi: any = '9d422527edba4ca2df20f3e9caa3e954';
 
   ngOnInit(): void {}
+  matchPW(value: any) {
+    for (let i = 0; i < this.password.length; i++) {
+      this.chx = value.charCodeAt(i);
+      if (
+        !(this.chx > 47 && this.chx < 58) && // numeric (0-9)
+        !(this.chx > 64 && this.chx < 91) && // upper alpha (A-Z)
+        !(this.chx > 96 && this.chx < 123)
+      ) {
+        // lower alpha (a-z)
+        this.isAphx = false;
+        this.aphxPrompt = '';
+        console.log('char apx');
+        return;
+      }
+    }
+    this.isAphx = true;
+    this.aphxPrompt =
+      'Must Contain at least one special character [/, *, <, @]';
+    return;
+  }
 
   signUp() {
     // Password Validation Checking
-
-    if (this.password != this.passwordCheck) {
-      this.isMismatched = true;
-      this.mismatchPrompt = "Password didn't match, try again";
+    if (this.password.length < 6 || this.passwordCheck.length < 6) {
+      this.isMinChar = true;
+      this.minCharPrompt = 'Must be 6 characters long';
+      return;
     } else {
+      this.isMinChar = false;
+      this.minCharPrompt = '';
+    }
+
+    if (this.password == this.passwordCheck) {
       this.isMismatched = false;
       this.mismatchPrompt = '';
+    } else {
+      this.isMismatched = true;
+      this.mismatchPrompt = "Password didn't match, try again";
       return;
     }
 
@@ -74,8 +107,8 @@ export class RegisterComponent implements OnInit {
     this.addUser.password = this.password;
     this.addUser.role = 'Standard';
     this.addUser.username = this.fnCode + this.lnCode + this.rgx;
-    this.addUser.profileImage =
-      'https://firebasestorage.googleapis.com/v0/b/prodscout-90022.appspot.com/o/1177568.png?alt=media&token=bcb5b1fe-fa13-4b73-9558-2840256caed0';
+    // this.addUser.profileImage =
+    //   'https://firebasestorage.googleapis.com/v0/b/prodscout-90022.appspot.com/o/1177568.png?alt=media&token=bcb5b1fe-fa13-4b73-9558-2840256caed0';
     //Converts number;
 
     //Stores to Database
@@ -84,7 +117,7 @@ export class RegisterComponent implements OnInit {
 
     //Sends SMS to the User via SMS API
 
-    this.http.post(this.postSMS, { title: 'Header' }).subscribe;
+    // this.http.post(this.postSMS, { title: 'Header' }).subscribe;
 
     //Calls Prompt;
 
@@ -97,6 +130,7 @@ export class RegisterComponent implements OnInit {
     this.email = '';
     this.password = '';
     this.contactNo = '';
+    this.passwordCheck = '';
   }
 
   openLogin() {
