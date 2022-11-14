@@ -83,10 +83,17 @@ export class DashboardComponent implements OnInit {
         icon: 'pi pi-fw pi-cog',
         items: [
           {
-            label: 'Manage Blacklist Sites',
+            label: 'Blacklist Sites',
             icon: 'pi pi-fw pi-exclamation-triangle',
             command: () => {
               this.router.navigateByUrl('/blacklist');
+            },
+          },
+          {
+            label: 'Desktop Watchlist',
+            icon: 'pi pi-fw pi-desktop',
+            command: () => {
+              this.router.navigateByUrl('/watchlist');
             },
           },
         ],
@@ -126,6 +133,7 @@ export class DashboardComponent implements OnInit {
       ref
         .where('profileId', '==', this.selectedProfile)
         .where('username', '==', this.profileUsername)
+        .limit(150)
         .orderBy('sessiongLogDate', 'desc')
     );
 

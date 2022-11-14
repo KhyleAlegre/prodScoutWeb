@@ -52,8 +52,7 @@
       <h5>
         Password
         <sup style="font-size: 10px; color: red"
-          >*Required [Must be at least 6 characters with letters and
-          numbers]</sup
+          >*Required [Must be alphanumeric and 6 characters long]</sup
         >
       </h5>
       <input
@@ -63,7 +62,16 @@
         [(ngModel)]="password"
         class="input-form-standard"
         required
+        (keyup)="matchPW($any($event.target).value)"
       />
+      <sup *ngIf="isAphx" style="font-size: 10px; color: red">{{
+        aphxPrompt
+      }}</sup>
+      <sup
+        *ngIf="isMinChar"
+        style="font-size: 10px; color: red; font-weight: bold"
+        >{{ minCharPrompt }}</sup
+      >
       <br />
       <h5>
         Re-Type Password

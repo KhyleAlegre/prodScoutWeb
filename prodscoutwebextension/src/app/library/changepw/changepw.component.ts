@@ -41,9 +41,7 @@ export class ChangepwComponent implements OnInit {
     // Retrieve User list
     this.userCollection = this.afs.collection('users');
     this.users = this.userCollection.valueChanges();
-    this.users.subscribe(
-      (data) => ((this.userList = data), console.log(this.userList))
-    );
+    this.users.subscribe((data) => (this.userList = data));
   }
 
   getChangePW() {

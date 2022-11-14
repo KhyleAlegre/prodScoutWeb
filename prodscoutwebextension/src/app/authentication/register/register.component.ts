@@ -36,12 +36,17 @@ export class RegisterComponent implements OnInit {
   fnCode: any;
   lnCode: any;
   rgx: any;
+  chx: any;
 
   // Workers
   noEmptyField: any;
   mismatchPrompt: any;
   displaySuccess: boolean = false;
   displayLogin: boolean = false;
+  isAphx: boolean = false;
+  aphxPrompt: any;
+  isMinChar: boolean = false;
+  minCharPrompt: any;
 
   // API
   postSMS: any = 'https://api.semaphore.co/api/v4/messages';
@@ -49,15 +54,44 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  matchPW(value: any) {
+    for (let i = 0; i < this.password.length; i++) {
+      this.chx = value.charCodeAt(i);
+      if (
+        !(this.chx > 47 && this.chx < 58) && // numeric (0-9)
+        !(this.chx > 64 && this.chx < 91) && // upper alpha (A-Z)
+        !(this.chx > 96 && this.chx < 123)
+      ) {
+        // lower alpha (a-z)
+        this.isAphx = false;
+        this.aphxPrompt = '';
+        console.log('char apx');
+        return;
+      }
+    }
+    this.isAphx = true;
+    this.aphxPrompt =
+      'Must Contain at least one special character [/, *, <, @]';
+    return;
+  }
+
   signUp() {
     // Password Validation Checking
-
-    if (this.password != this.passwordCheck) {
-      this.isMismatched = true;
-      this.mismatchPrompt = "Password didn't match, try again";
+    if (this.password.length < 6 || this.passwordCheck.length < 6) {
+      this.isMinChar = true;
+      this.minCharPrompt = 'Must be 6 characters long';
+      return;
     } else {
+      this.isMinChar = false;
+      this.minCharPrompt = '';
+    }
+
+    if (this.password == this.passwordCheck) {
       this.isMismatched = false;
       this.mismatchPrompt = '';
+    } else {
+      this.isMismatched = true;
+      this.mismatchPrompt = "Password didn't match, try again";
       return;
     }
 
@@ -84,7 +118,7 @@ export class RegisterComponent implements OnInit {
 
     //Sends SMS to the User via SMS API
 
-    this.http.post(this.postSMS, { title: 'Header' }).subscribe;
+    //this.http.post(this.postSMS, { title: 'Header' }).subscribe;
 
     //Calls Prompt;
 
@@ -97,6 +131,7 @@ export class RegisterComponent implements OnInit {
     this.email = '';
     this.password = '';
     this.contactNo = '';
+    this.passwordCheck = '';
   }
 
   openLogin() {

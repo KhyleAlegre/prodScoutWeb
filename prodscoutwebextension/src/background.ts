@@ -1,6 +1,8 @@
 ///<reference types="chrome"/>
 //Imports
 import firebase from 'firebase/compat/app';
+import 'firebase/storage';
+import 'firebase/compat/storage';
 import { getStorage } from 'firebase/storage';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -22,6 +24,8 @@ firebase.initializeApp(firebaseConfig);
 var afs = firebase.firestore();
 var event = afs.collection('profileLogs');
 var session = afs.collection('sessions');
+var screenshot = afs.collection('screenshots');
+var gallery = afs.collection('gallery');
 var profileId: any;
 var password: any;
 var creds: any;
@@ -41,35 +45,52 @@ var SSRequest: boolean = false;
 var startSession: any;
 var endSession: any;
 var sessionDate: any;
+var screenshotTime: any;
 
 //Load Profile
 chrome.runtime.onInstalled.addListener(() => {
   // creates an alarm after extension is installed / upgraded
   // Ensures that user data is being loaded // It will take at least 1 minute to sync the data from the server
   // This is the current limitation of the app and the server due to the current pricing package availed for this project
-  chrome.alarms.create('Run Time', { periodInMinutes: 1 });
-});
+  // Set an Alarm to get random screenshot for every 15 mins
+  chrome.alarms.create('Run Time', { periodInMinutes: 15 });
 
-// Data Validator, since this is running independently on our app, we need to
-// run this every time to ensure credentials and status are being authenticated properly
-chrome.alarms.onAlarm.addListener(() => {
-  welcomeNotification();
-
-  chrome.storage.sync.get(['Profile'], function (result) {
-    profileId = result['Profile'];
-  });
-  chrome.storage.sync.get(['Password'], function (result) {
-    password = result['Password'];
-  });
-  // Fetch the username / useraccount Id
-  getFirestore();
-  getBlackList();
-
-  // Gets Random Screenshot
   setInterval(() => {
-    getScreenshot();
-  }, 900000);
+    chrome.storage.sync.get(['Profile'], function (result) {
+      profileId = result['Profile'];
+    });
+    chrome.storage.sync.get(['Password'], function (result) {
+      password = result['Password'];
+    });
+
+    console.log(profileId, password);
+    // Fetch the username / useraccount Id
+    getFirestore();
+    console.log(creds);
+    getBlackList();
+  }, 3000);
 });
+
+// Gets Random Screenshot on Alarm
+chrome.alarms.onAlarm.addListener(() => {
+  getScreenshot;
+});
+
+/*chrome.runtime.onStartup.addListener(() => {
+  setInterval(() => {
+    chrome.storage.sync.get(['Profile'], function (result) {
+      profileId = result['Profile'];
+    });
+    chrome.storage.sync.get(['Password'], function (result) {
+      password = result['Password'];
+    });
+
+    console.log(profileId, password);
+    // Fetch the username / useraccount Id
+    getFirestore();
+    getBlackList();
+  }, 3000);
+}); */
 
 // Detects any changes on the tab
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
@@ -112,7 +133,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
             deviceType: 'Browser',
             sessionMode: 'Changed Tab to: ' + url,
             sessionStatus: true,
-            photoUrl: '',
+            photoUrl: ssUrl,
             sessiongLogDate: sessionTimeStamp,
             displaySessionDate: sessionTimeStamp.toLocaleDateString(),
             displaySessionTime: sessionTimeStamp.toLocaleTimeString('en-US'),
@@ -136,7 +157,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
             chrome.tabs.update(tabId, {
               url: 'https://prodscout.vercel.app/#/blocked',
             });
-          }, 2000);
+          }, 4000);
         }
       }
     });
@@ -176,7 +197,7 @@ chrome.tabs.onActivated.addListener(function (tab) {
             deviceType: 'Browser',
             sessionMode: 'Switched Tab to: ' + url,
             sessionStatus: true,
-            photoUrl: '',
+            photoUrl: ssUrl,
             sessiongLogDate: sessionTimeStamp,
             displaySessionDate: sessionTimeStamp.toLocaleDateString(),
             displaySessionTime: sessionTimeStamp.toLocaleTimeString('en-US'),
@@ -226,7 +247,7 @@ chrome.tabs.onCreated.addListener(function (tab) {
             deviceType: 'Browser',
             sessionMode: 'Open a New Tab: ' + url,
             sessionStatus: true,
-            photoUrl: '',
+            photoUrl: ssUrl,
             sessiongLogDate: sessionTimeStamp,
             displaySessionDate: sessionTimeStamp.toLocaleDateString(),
             displaySessionTime: sessionTimeStamp.toLocaleTimeString('en-US'),
@@ -247,10 +268,6 @@ chrome.tabs.onCreated.addListener(function (tab) {
 });
 
 //***********FUNCTIONS ***** */
-// Intro (for Devs and Checking Only)
-function welcomeNotification() {
-  console.log('We are Scouting You');
-}
 
 // Get Profile Data
 async function getFirestore() {
@@ -285,12 +302,22 @@ async function getBlackList() {
 function getScreenshot() {
   chrome.tabs.captureVisibleTab((data) => {
     ssUrl = data;
+    screenshotTime = new Date();
     console.log('screenshot', ssUrl);
-    localStorage.setItem('dataUrl', ssUrl);
-    // Set Storage for the meantime
-    //  ssPathName = 'sessionSS' + Math.random();
-    // const storage = getStorage();
-    // imageRef = ref(storage, ssPathName);
+    gallery.add({
+      profileId: profileId,
+      userName: creds,
+      ssUrl: ssUrl,
+      logDate: screenshotTime,
+    });
+    //Set Storage for the meantime
+    // ssPathName = 'sessionSS' + Math.random();
+    //firebase.storage().ref(ssPathName).putString(ssUrl, 'data_url', {
+    //contentType: 'image/png',
+    //});
+
+    //const storage = getStorage();
+    //imageRef = ref(storage).putString();
     //imageBaseRef = uploadBytes(imageRef, ssUrl);
   });
 }

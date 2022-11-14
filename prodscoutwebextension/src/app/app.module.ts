@@ -68,6 +68,7 @@ import { AdmindashboardComponent } from './core/admindashboard/admindashboard.co
 import { ChangepwComponent } from './library/changepw/changepw.component';
 import { GalleryComponent } from './library/gallery/gallery.component';
 import { AdminLogsComponent } from './core/admin-logs/admin-logs.component';
+import { WatchlistComponent } from './library/watchlist/watchlist.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import { AdminLogsComponent } from './core/admin-logs/admin-logs.component';
     ChangepwComponent,
     GalleryComponent,
     AdminLogsComponent,
+    WatchlistComponent,
   ],
   imports: [
     BrowserModule,

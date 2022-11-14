@@ -1,15 +1,15 @@
 <div class="main">
   <div class="titleContainer">
     <img class="blackList" src="assets/bl.png" />
-    <h2>Manage Blacklist Sites</h2>
+    <h2>Manage Desktop Watchlist</h2>
   </div>
   <div class="addSiteContainer">
     <div class="l1">
-      <h5>Site / Url</h5>
+      <h5>Application Extension Name</h5>
       <input
         type="text"
         pInputText
-        [(ngModel)]="urlSite"
+        [(ngModel)]="exeName"
         class="input-form-standard"
       />
     </div>
@@ -28,9 +28,9 @@
     <div class="l3">
       <br />
       <p-button
-        label="Add to Blacklist"
+        label="Add to Watchlist"
         [style]="{ width: '98%' }"
-        (click)="addSite()"
+        (click)="addApp()"
       ></p-button>
     </div>
   </div>
@@ -50,8 +50,8 @@
       </div>
     </div>
 
-    <div class="siteList" *ngFor="let list of blackList">
-      <div class="c1">{{ list.samplesite }}</div>
+    <div class="siteList" *ngFor="let list of watchList">
+      <div class="c1">{{ list.applicationName }}</div>
       <div class="c2">{{ list.category }}</div>
       <div class="c3">
         <button
@@ -60,7 +60,7 @@
           type="button"
           icon="pi pi-times"
           class="p-button-rounded p-button-danger p-button-sm"
-          (click)="getSite(list)"
+          (click)="getApp(list)"
         ></button>
       </div>
     </div>
@@ -76,7 +76,7 @@
   ></button>
 </div>
 <p-dialog
-  header="Add Blacklist"
+  header="Add Watchlist"
   [modal]="true"
   [(visible)]="displayAddPrompt"
   class="dialogSize"
@@ -91,14 +91,14 @@
 </p-dialog>
 
 <p-dialog
-  header="Remove from Blacklist"
+  header="Remove from Watchlist"
   [modal]="true"
   [(visible)]="displayDeletePrompt"
   class="dialogSize"
 >
   <div style="text-align: center">
     <p-divider align="center" type="dashed"></p-divider>
-    <h1 style="color: #f53d3d">Remove from being blacklisted?</h1>
+    <h1 style="color: #f53d3d">Remove from watchlist?</h1>
     <br />
     <button
       pButton
@@ -106,7 +106,7 @@
       type="button"
       label="Delete"
       class="p-button-danger"
-      (click)="deleteSite()"
+      (click)="deleteApp()"
     ></button>
     &nbsp; &nbsp;
     <button

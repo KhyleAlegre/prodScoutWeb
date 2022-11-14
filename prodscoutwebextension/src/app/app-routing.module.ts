@@ -14,6 +14,7 @@ import { AdminComponent } from './authentication/admin/admin.component';
 import { AdmindashboardComponent } from './core/admindashboard/admindashboard.component';
 import { GalleryComponent } from './library/gallery/gallery.component';
 import { AdminLogsComponent } from './core/admin-logs/admin-logs.component';
+import { WatchlistComponent } from './library/watchlist/watchlist.component';
 //Dashboard - Parent
 
 // Parent Routes / Main Routes
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'admin', component: AdmindashboardComponent },
   { path: 'gallery', component: GalleryComponent },
   { path: 'adminLogs', component: AdminLogsComponent },
+  { path: 'watchlist', component: WatchlistComponent },
 ];
 
 @NgModule({

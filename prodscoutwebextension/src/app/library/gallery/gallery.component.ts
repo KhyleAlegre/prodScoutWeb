@@ -45,7 +45,7 @@ export class GalleryComponent implements OnInit {
   getGallery() {
     this.galleryCollection = this.afs.collection('gallery', (ref) =>
       ref
-        .where('profileName', '==', this.selectedProfile)
+        .where('profileId', '==', this.selectedProfile)
         .where('userName', '==', this.profileUsername)
         .orderBy('logDate', 'desc')
         .limit(500)

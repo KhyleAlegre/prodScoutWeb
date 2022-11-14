@@ -35,7 +35,7 @@ export class DashtoolsComponent implements OnInit {
       this.afs.collection('profiles').doc(this.profileId).update({
         nudge: false,
       });
-    }, 5000);
+    }, 3000);
 
     // Sends Notif
     this.displayNudge = true;
@@ -52,7 +52,7 @@ export class DashtoolsComponent implements OnInit {
       this.afs.collection('profiles').doc(this.profileId).update({
         ssrequest: false,
       });
-    }, 8000);
+    }, 3000);
 
     // Sends Notif
     this.displaySS = true;
