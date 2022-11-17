@@ -46,7 +46,7 @@
           pButton
           type="button"
           label="View Logs"
-          class="view-btn"
+          class="p-button-warning view-btn"
           (click)="openLogs()"
         ></button>
       </div>
@@ -86,14 +86,9 @@
     </div>
     <div class="dataMenu">
       <br />
-      <label style="font-weight: bold; font-size: 16px">Update Email:</label>
+      <label style="font-weight: bold; font-size: 16px">Email:</label>
       <br />
-      <input
-        type="text"
-        pInputText
-        [(ngModel)]="userEmail"
-        class="input-form-standard"
-      />
+      <input type="text" [(ngModel)]="userEmail" class="input-form-standard" />
       <br />
       <sup
         *ngIf="noNull"
@@ -101,11 +96,10 @@
         >Fields should not be empty</sup
       >
       <br />
-      <label style="font-weight: bold; font-size: 16px">Update Contact:</label>
+      <label style="font-weight: bold; font-size: 16px">Contact:</label>
       <br />
       <input
         type="text"
-        pInputText
         [(ngModel)]="userContact"
         class="input-form-standard"
       />
@@ -116,11 +110,10 @@
         >Fields should not be empty</sup
       >
       <br />
-      <label style="font-weight: bold; font-size: 16px">Update Password:</label>
+      <label style="font-weight: bold; font-size: 16px">Password:</label>
       <br />
       <input
         type="text"
-        pInputText
         [(ngModel)]="userPassword"
         class="input-form-standard"
       />
@@ -130,8 +123,16 @@
         style="font-size: 12px; color: red; font-style: italic"
         >Fields should not be empty</sup
       >
-      <label style="font-size: 18px; color: #5f9df7">{{ updatePrompt }}</label>
       <br />
+      <label style="font-weight: bold; font-size: 16px">Role:</label>
+      <br />
+      <select class="select-drop" name="joStatus" [(ngModel)]="userRole">
+        <option value="Standard">Standard</option>
+        <option value="Teacher">Teacher</option>
+      </select>
+      <br />
+      <br />
+      <label style="font-size: 18px; color: #5f9df7">{{ updatePrompt }}</label>
       <br />
       <button
         pButton
@@ -140,6 +141,41 @@
         class="updt-btn"
         (click)="updateDetails()"
       ></button>
+      <br />
+      <br />
+      <button
+        pButton
+        type="button"
+        label="Delete User"
+        class="p-button-danger"
+        (click)="deleteUser()"
+      ></button>
+      <p-dialog
+        header="Delete?"
+        [(visible)]="displayDelete"
+        [style]="{ width: '20vw', height: '20vw' }"
+      >
+        <div style="text-align: center">
+          <h4>Confirm Delete?</h4>
+          <br />
+          <button
+            pButton
+            type="button"
+            label="Yes"
+            class="p-button-danger"
+            (click)="confirmDelete()"
+          ></button>
+
+          &nbsp; &nbsp;
+          <button
+            pButton
+            type="button"
+            label="No"
+            styleClass="p-button-sm"
+            (click)="cancelDelete()"
+          ></button>
+        </div>
+      </p-dialog>
       <br />
       <br />
       <br />

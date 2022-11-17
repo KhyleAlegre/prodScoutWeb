@@ -55,7 +55,6 @@
 
         .view-btn {
           width: 100%;
-          background: #749f82;
         }
       }
     }
@@ -161,6 +160,13 @@
       border: solid 2px #e1e1e1;
       margin-top: 10px;
       padding: 5px;
+      .input-form-standard {
+        font-size: 18px;
+      }
+      .select-drop {
+        font-size: 18px;
+        width: 70%;
+      }
     }
   }
 }

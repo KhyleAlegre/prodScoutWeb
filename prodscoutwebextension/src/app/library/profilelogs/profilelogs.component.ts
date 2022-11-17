@@ -29,13 +29,10 @@ export class ProfilelogsComponent implements OnInit {
   ngOnInit(): void {
     this.storedProfileData = JSON.parse(localStorage.getItem('selectedData')!);
     this.profileData = this.storedProfileData;
-    console.log(this.storedProfileData.profileId);
     this.profileName = this.profileData.profileId;
     this.profilePassword = this.profileData.profilePassword;
     this.profileUsername = this.profileData.username;
     this.profileId = this.profileData.id;
-
-    console.log(this.profileName, this.profileUsername);
     this.eventCollection = this.afs.collection('profileLogs', (ref) =>
       ref
         .where('profileName', '==', this.profileName)

@@ -7,6 +7,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable, concatWith } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { userModel } from 'src/app/models/users.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-myprofile',
@@ -14,7 +15,11 @@ import { userModel } from 'src/app/models/users.model';
   styleUrls: ['./myprofile.component.scss'],
 })
 export class MyprofileComponent implements OnInit {
-  constructor(public afs: AngularFirestore, private afsU: AngularFireStorage) {}
+  constructor(
+    public afs: AngularFirestore,
+    private afsU: AngularFireStorage,
+    private router: Router
+  ) {}
   username: any;
   firstName: any;
   lastName: any;
@@ -51,6 +56,12 @@ export class MyprofileComponent implements OnInit {
   imagePathName: any;
   imageSub: any;
   userCredentials!: userModel[];
+  isMinChar: boolean = false;
+  minCharPrompt: any;
+  isAphx: boolean = false;
+  aphxPrompt: any;
+  chx: any;
+
   private userCollection!: AngularFirestoreCollection<userModel>;
   users!: Observable<userModel[]>;
 
@@ -172,6 +183,17 @@ export class MyprofileComponent implements OnInit {
       this.passwordChecker = false;
     }
 
+    if (this.newPassword.length < 6 || this.checkPassword < 6) {
+      this.isMinChar = true;
+      this.minCharPrompt = 'Must be 6 characters long';
+      return;
+    } else {
+      this.isMinChar = false;
+      this.minCharPrompt = '';
+    }
+
+    this.matchPW(this.newPassword);
+
     this.afs.collection('users').doc(this.accountId).update({
       password: this.newPassword,
     });
@@ -193,6 +215,27 @@ export class MyprofileComponent implements OnInit {
   browseImage($event: any) {
     this.eventImage = $event.files[0];
     this.uploadImage();
+  }
+
+  matchPW(value: any) {
+    for (let i = 0; i < this.newPassword.length; i++) {
+      this.chx = value.charCodeAt(i);
+      if (
+        !(this.chx > 47 && this.chx < 58) && // numeric (0-9)
+        !(this.chx > 64 && this.chx < 91) && // upper alpha (A-Z)
+        !(this.chx > 96 && this.chx < 123)
+      ) {
+        // lower alpha (a-z)
+        this.isAphx = false;
+        this.aphxPrompt = '';
+        console.log('char apx');
+        return;
+      }
+    }
+    this.isAphx = true;
+    this.aphxPrompt =
+      'Must Contain at least one special character [/, *, <, @]';
+    return;
   }
 
   uploadImage() {
@@ -225,5 +268,9 @@ export class MyprofileComponent implements OnInit {
           )
         );
       });
+  }
+
+  backtoDb() {
+    this.router.navigateByUrl('/dashboard');
   }
 }

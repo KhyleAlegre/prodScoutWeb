@@ -5,14 +5,6 @@
         <img src="assets/ps48.png" height="40" class="mr-2" />
       </ng-template>
       <ng-template pTemplate="end">
-        <button
-          pButton
-          pRipple
-          type="button"
-          icon="pi pi-bell"
-          class="p-button-rounded p-button-text"
-        ></button>
-
         <img
           alt="logo"
           [src]="logProfileUrl"
@@ -81,6 +73,12 @@
     </li>
   </div>
   <div class="lowerdash">
+    <div class="mobileContainer">
+      <app-mobiletools></app-mobiletools>
+      <br />
+      <br />
+      <br />
+    </div>
     <div class="activityLog">
       <label style="margin: 5px; font-weight: bold; font-size: 18px">
         Activity Logs {{ displayName }}
@@ -116,9 +114,6 @@
     </div>
     <div class="userTools">
       <label class="toolLabel"> Monitoring Tools {{ displayName }} </label>
-      <div class="mobileContainer">
-        <app-mobiletools></app-mobiletools>
-      </div>
       <div class="toolContainer">
         <app-dashtools></app-dashtools>
       </div>

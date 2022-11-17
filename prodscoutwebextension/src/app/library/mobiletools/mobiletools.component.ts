@@ -19,7 +19,7 @@ export class MobiletoolsComponent implements OnInit {
 
   eventList!: profileLogsModel[];
   storedProfileData: any;
-  profileData!: profileModels[];
+  profileData!: profileModels;
   profileName: any;
   profilePassword: any;
   profileUsername: any;
@@ -82,9 +82,10 @@ export class MobiletoolsComponent implements OnInit {
   loadProfile() {
     this.storedProfileData = JSON.parse(localStorage.getItem('selectedData')!);
     this.profileData = this.storedProfileData;
-    this.profileName = this.profileData[0].profileId;
-    this.profilePassword = this.profileData[0].profilePassword;
-    this.profileUsername = this.profileData[0].username;
+    this.profileName = this.profileData.profileId;
+    this.profilePassword = this.profileData.profilePassword;
+    this.profileUsername = this.profileData.username;
+    this.profileId = this.profileData.id;
     console.log(this.profileName, this.profilePassword, this.profileUsername);
   }
 
@@ -100,7 +101,7 @@ export class MobiletoolsComponent implements OnInit {
       this.afs.collection('profiles').doc(this.profileId).update({
         nudge: false,
       });
-    }, 8000);
+    }, 3000);
 
     // Sends Notif
     this.displayNudge = true;
@@ -117,7 +118,7 @@ export class MobiletoolsComponent implements OnInit {
       this.afs.collection('profiles').doc(this.profileId).update({
         ssrequest: false,
       });
-    }, 8000);
+    }, 3000);
 
     // Sends Notif
     this.displaySS = true;
@@ -145,7 +146,9 @@ export class MobiletoolsComponent implements OnInit {
     alert('Holiday Mode has been set');
   }
 
-  showScheduling() {}
+  showScheduling() {
+    alert('Scheduling is only available on Desktop');
+  }
 
   showLogs() {
     this.displayLogs = true;

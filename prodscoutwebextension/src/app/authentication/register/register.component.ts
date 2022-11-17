@@ -4,7 +4,8 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { userModel } from 'src/app/models/users.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { smsModel } from 'src/app/models/sms.model';
 
 @Component({
   selector: 'app-register',
@@ -31,7 +32,7 @@ export class RegisterComponent implements OnInit {
   email: any;
   password: any;
   passwordCheck: any;
-  contactNo: any = '+63';
+  contactNo!: any;
   isMismatched: boolean = false;
   fnCode: any;
   lnCode: any;
@@ -50,7 +51,14 @@ export class RegisterComponent implements OnInit {
 
   // API
   postSMS: any = 'https://api.semaphore.co/api/v4/messages';
-  postSMSApi: any = '9d422527edba4ca2df20f3e9caa3e954';
+  postSMSApi: any = '63da0d82e426e76ee3bccf27622cbe83';
+
+  smsApi: smsModel = {
+    apikey: this.postSMSApi,
+    number: this.contactNo,
+    message:
+      'You have successfully registered this mobile number to prodScout, SMS updates for your profile are sent here.',
+  };
 
   ngOnInit(): void {}
 
@@ -95,11 +103,17 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    this.matchPW(this.password);
+
     //Creates Username
     this.fnCode = this.firstName.slice(2);
     this.lnCode = this.lastName.slice(2);
     this.rgx = Math.floor(Math.random() * 90000) + 10000;
     this.rgx = this.rgx.toString();
+
+    //Converts number;
+    this.contactNo = this.contactNo.slice(1);
+    this.contactNo = '+63' + this.contactNo;
 
     //Field Completion
     this.addUser.firstName = this.firstName;
@@ -108,19 +122,28 @@ export class RegisterComponent implements OnInit {
     this.addUser.password = this.password;
     this.addUser.role = 'Standard';
     this.addUser.username = this.fnCode + this.lnCode + this.rgx;
+    this.addUser.contactNo = this.contactNo;
     this.addUser.profileImage =
       'https://firebasestorage.googleapis.com/v0/b/prodscout-90022.appspot.com/o/1177568.png?alt=media&token=bcb5b1fe-fa13-4b73-9558-2840256caed0';
-    //Converts number;
 
     //Stores to Database
-
     this.afs.collection('users').add(this.addUser);
 
-    //Sends SMS to the User via SMS API
+    // Sends SMS
 
-    //this.http.post(this.postSMS, { title: 'Header' }).subscribe;
-
-    //Calls Prompt;
+    // Send Email
+    this.afs.collection('mail').add({
+      to: this.email,
+      message: {
+        subject: 'Welcome to prodScout',
+        html:
+          'Hi ' +
+          this.firstName +
+          ' ,Thank you for registering to our App, your username for this account is: ' +
+          this.addUser.username +
+          ' , please remember this as this will be used as part of your logging credentials in all of our scouting apps, thank you! - prodScout Team',
+      },
+    });
 
     this.displaySuccess = true;
 

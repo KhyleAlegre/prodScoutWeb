@@ -62,14 +62,9 @@ export class ChangepwComponent implements OnInit {
     }
 
     for (let i = 0; i < this.userList.length; i++) {
-      if (
-        this.email == this.userList[i].email &&
-        this.username == this.userList[i].username
-      ) {
+      if (this.email == this.userList[i].email) {
         this.userValidationCollection = this.afs.collection('users', (ref) =>
-          ref
-            .where('email', '==', this.email)
-            .where('username', '==', this.username)
+          ref.where('email', '==', this.email)
         );
 
         this.validatedUsers = this.userValidationCollection
@@ -89,11 +84,10 @@ export class ChangepwComponent implements OnInit {
           this.userId = this.userCredentials[0].id;
           this.genPassword = Math.random().toString(36).replace('0.', '');
         });
+
         this.invalidCreds = false;
         this.showMain = false;
         this.showGenPage = true;
-        this.email = '';
-        this.username = '';
         return;
       } else {
         this.invalidCreds = true;
@@ -107,7 +101,21 @@ export class ChangepwComponent implements OnInit {
     this.afs.collection('users').doc(this.userId).update({
       password: this.genPassword,
     });
+    console.log(this.email);
+    this.afs.collection('mail').add({
+      to: this.email,
+      message: {
+        subject: 'Password Reset Notice',
+        html:
+          'You recently requested a password change, here is the generated password: ' +
+          this.genPassword +
+          ' you may use this to temporary access your account and update your password. -Cheers!',
+      },
+    });
+
     this.showMain = true;
     this.showGenPage = false;
+    this.email = '';
+    this.username = '';
   }
 }

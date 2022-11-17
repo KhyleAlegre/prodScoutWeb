@@ -21,19 +21,6 @@
       class="input-form-standard"
     />
     <br />
-    <h5>
-      Enter your username
-      <sup *ngIf="noUser" style="font-size: 10px; color: red">{{
-        userPrompt
-      }}</sup>
-    </h5>
-    <input
-      type="text"
-      pInputText
-      [(ngModel)]="username"
-      class="input-form-standard"
-    />
-    <br />
     <div *ngIf="invalidCreds" class="invalid">
       Hi! Unfortunately your credentials doesn't match, please try again.
     </div>
@@ -49,24 +36,12 @@
     <br />
   </div>
   <div *ngIf="showGenPage" class="genPage">
-    <h5>
-      This is your new password, please copy the details and use this generated
-      password to login to your updated account
-    </h5>
-    <br />
-    <input
-      id="pwGX"
-      type="text"
-      pInputText
-      [(ngModel)]="genPassword"
-      class="input-form-standard"
-    />
-    <br />
+    <h5>A password shall be sent to your registered email.</h5>
     <br />
     <button
       pButton
       type="button"
-      label="Update Password"
+      label="Update and Send Password"
       (click)="copyPw()"
       class="signup-btn"
     ></button>

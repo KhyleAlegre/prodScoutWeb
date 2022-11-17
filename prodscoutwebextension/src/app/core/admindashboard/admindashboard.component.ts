@@ -35,6 +35,8 @@ export class AdmindashboardComponent implements OnInit {
   totalProfiles: any;
   totalUsers: any;
   updatePrompt: any;
+  displayDelete: boolean = false;
+  userRole: any;
 
   private userCollection!: AngularFirestoreCollection<userModel>;
   users!: Observable<userModel[]>;
@@ -79,6 +81,7 @@ export class AdmindashboardComponent implements OnInit {
     this.userContact = this.userData.contactNo;
     this.userEmail = this.userData.email;
     this.userIdKey = this.userData.id;
+    this.userRole = this.userData.role;
   }
 
   updateDetails() {
@@ -93,6 +96,7 @@ export class AdmindashboardComponent implements OnInit {
       password: this.userPassword,
       contactNo: this.userContact,
       email: this.userEmail,
+      role: this.userRole,
     });
 
     this.updatePrompt = 'Profile has been updated!';
@@ -103,6 +107,21 @@ export class AdmindashboardComponent implements OnInit {
       this.userContact = '';
       this.updatePrompt = '';
     }, 2000);
+  }
+
+  confirmDelete() {
+    this.afs.collection('users').doc(this.userIdKey).delete();
+    this.displayDelete = false;
+  }
+  deleteUser() {
+    if (!this.userData) {
+      return alert('Please select a user first');
+    } else {
+      this.displayDelete = true;
+    }
+  }
+  cancelDelete() {
+    this.displayDelete = false;
   }
   openLogs() {
     this.router.navigateByUrl('/adminLogs');

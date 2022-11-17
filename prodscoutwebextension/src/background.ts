@@ -26,7 +26,13 @@ var event = afs.collection('profileLogs');
 var session = afs.collection('sessions');
 var screenshot = afs.collection('screenshots');
 var gallery = afs.collection('gallery');
+var smsApi = afs.collection('messages');
+var smsEmail = afs.collection('mail');
+var userData: any[] = [];
+var email: any;
+var contactNo: any;
 var profileId: any;
+var profileName: any;
 var password: any;
 var creds: any;
 var profileData: any[] = [];
@@ -53,7 +59,7 @@ chrome.runtime.onInstalled.addListener(() => {
   // Ensures that user data is being loaded // It will take at least 1 minute to sync the data from the server
   // This is the current limitation of the app and the server due to the current pricing package availed for this project
   // Set an Alarm to get random screenshot for every 15 mins
-  chrome.alarms.create('Run Time', { periodInMinutes: 15 });
+  chrome.alarms.create('Run Time', { periodInMinutes: 1 });
 
   setInterval(() => {
     chrome.storage.sync.get(['Profile'], function (result) {
@@ -73,10 +79,6 @@ chrome.runtime.onInstalled.addListener(() => {
 
 // Gets Random Screenshot on Alarm
 chrome.alarms.onAlarm.addListener(() => {
-  getScreenshot;
-});
-
-/*chrome.runtime.onStartup.addListener(() => {
   setInterval(() => {
     chrome.storage.sync.get(['Profile'], function (result) {
       profileId = result['Profile'];
@@ -88,9 +90,27 @@ chrome.alarms.onAlarm.addListener(() => {
     console.log(profileId, password);
     // Fetch the username / useraccount Id
     getFirestore();
+    console.log(creds);
     getBlackList();
   }, 3000);
-}); */
+});
+
+chrome.runtime.onStartup.addListener(() => {
+  chrome.alarms.create('Run Time', { periodInMinutes: 1 });
+  /*setInterval(() => {
+    chrome.storage.sync.get(['Profile'], function (result) {
+      profileId = result['Profile'];
+    });
+    chrome.storage.sync.get(['Password'], function (result) {
+      password = result['Password'];
+    });
+
+    console.log(profileId, password);
+    // Fetch the username / useraccount Id
+    getFirestore();
+    getBlackList();
+  }, 3000);*/
+});
 
 // Detects any changes on the tab
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
@@ -147,6 +167,8 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
           });
 
           //SMS API
+          sendSMS();
+          sendEmail();
 
           setTimeout(() => {
             let redirectUrl = { url: 'https://prodscout.vercel.app/#/blocked' };
@@ -211,6 +233,8 @@ chrome.tabs.onActivated.addListener(function (tab) {
           });
 
           //SMS API
+          sendSMS();
+          sendEmail();
         }
       }
     });
@@ -261,6 +285,8 @@ chrome.tabs.onCreated.addListener(function (tab) {
           });
 
           //SMS API
+          sendSMS();
+          sendEmail();
         }
       }
     });
@@ -287,6 +313,7 @@ async function getFirestore() {
   checkNudge();
   checkSS();
   checkSchedule();
+  getUser();
 }
 
 // Loads the blacklisted site from the server
@@ -296,6 +323,40 @@ async function getBlackList() {
     .where('username', '==', creds)
     .get();
   blackList = list.docs.map((doc) => doc.data());
+}
+
+async function getUser() {
+  const snapshot = await afs
+    .collection('users')
+    .where('username', '==', creds)
+    .get();
+  userData = snapshot.docs.map((doc) => doc.data());
+  contactNo = userData[0].contactNo;
+  email = userData[0].email;
+}
+
+function sendSMS() {
+  profileName = profileId;
+  smsApi.add({
+    to: contactNo,
+    body:
+      profileName +
+      ' did a suspicious web activity from a blacklist site of yours, log to the app to check',
+  });
+}
+
+function sendEmail() {
+  profileName = profileId;
+  smsEmail.add({
+    to: email,
+    message: {
+      subject: 'Scout Alert - Suspicious Web Activity',
+      html:
+        'Our scouts have noticed an unusual activity from ' +
+        profileName +
+        ', We have logged this activity and saved a screenshot. log to the app to check',
+    },
+  });
 }
 
 // Takes Screenshots

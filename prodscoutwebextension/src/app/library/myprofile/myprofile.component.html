@@ -14,6 +14,14 @@
       (uploadHandler)="browseImage($event)"
       chooseLabel="Upload"
     ></p-fileUpload>
+    <br />
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Back to Dashboard"
+      (click)="backtoDb()"
+    ></button>
   </div>
   <div class="profileContainer">
     <h2>{{ firstName }} {{ lastName }}</h2>
@@ -90,7 +98,7 @@
         Contact No:<sup
           style="font-size: 10px; color: red"
           *ngIf="fieldCheckerContact"
-          >*This field must not be emptly</sup
+          >*This field must not be empty</sup
         >
       </h5>
       <input
@@ -154,7 +162,17 @@
           pInputText
           [(ngModel)]="newPassword"
           class="p-inputtext p-component p-element input-form-standard ng-valid p-filled ng-dirty ng-touched"
+          (keyup)="matchPW($any($event.target).value)"
         />
+        <br />
+        <sup
+          *ngIf="isMinChar"
+          style="font-size: 10px; color: red; font-weight: bold"
+          >{{ minCharPrompt }}</sup
+        >
+        <sup *ngIf="isAphx" style="font-size: 10px; color: red">{{
+          aphxPrompt
+        }}</sup>
         <br />
         <h5>
           Repeat New Password:
