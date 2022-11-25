@@ -1,44 +1,80 @@
 <div class="navBar">
-    <img src="assets/home-logo.png" class="imgNav">
-    <div class="navLink">
-        <div class="navList">
-            <li>
-                <a>Product  
-                 <div class="blockLine"></div>
-                </a>
-              </li>
-              <li>
-                  <a>Families
-                   <div class="blockLine"></div>
-                  </a>
-              </li>
-              <li>
-                  <a>School
-                   <div class="blockLine"></div>
-                  </a>
-              </li>
-        </div>
-        <div class="mobileButton">
-            <button pButton pRipple type="button" icon="pi pi-bars" (click)="showMobileMenu()" class="p-button-rounded p-button-text mobile-btn"></button>
-            <p-dialog header="Welcome to prodScout" [modal]="true" [(visible)]="displayMobile" [style]="{width: '80vw'}">
-                <br>
-                <div class="menuContainer">
-                    <app-mobilemenu></app-mobilemenu>
-                </div>
-                
-              </p-dialog>
-        </div>
-
-        <div class="desktopButton">
-            <button (click)="showLogIn()" pButton type="button" label="LOGIN" class="login-btn"></button>
-            <p-dialog header="Log In" [modal]="true" [(visible)]="displayBasic" [style]="{width: '40vw'}">
-              <app-login></app-login>   
-            </p-dialog>
-            
-            <button (click)="showRegister()" pButton type="button" label="SIGN UP" class="signup-btn"></button>
-            <p-dialog header="Register" [modal]="true" [(visible)]="displayRegister" [style]="{width: '50vw'}">
-               <app-register></app-register>
-            </p-dialog>
-        </div>
+  <img src="assets/home-logo.png" class="imgNav" (click)="openHome()" />
+  <div class="navLink">
+    <div class="navList">
+      <li>
+        <a (click)="openProduct()"
+          >Product
+          <div class="blockLine"></div>
+        </a>
+      </li>
+      <li>
+        <a (click)="openFam()"
+          >Families
+          <div class="blockLine"></div>
+        </a>
+      </li>
+      <li>
+        <a (click)="openSchools()"
+          >School
+          <div class="blockLine"></div>
+        </a>
+      </li>
     </div>
+    <div class="mobileButton">
+      <button
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-bars"
+        (click)="showMobileMenu()"
+        class="p-button-rounded p-button-text mobile-btn"
+      ></button>
+      <p-dialog
+        header="Welcome to prodScout"
+        [modal]="true"
+        [(visible)]="displayMobile"
+        [style]="{ width: '80vw' }"
+      >
+        <br />
+        <div class="menuContainer">
+          <app-mobilemenu></app-mobilemenu>
+        </div>
+      </p-dialog>
+    </div>
+
+    <div class="desktopButton">
+      <button
+        (click)="showLogIn()"
+        pButton
+        type="button"
+        label="LOGIN"
+        class="login-btn"
+      ></button>
+      <p-dialog
+        header="Log In"
+        [modal]="true"
+        [(visible)]="displayBasic"
+        [style]="{ width: '40vw' }"
+      >
+        <app-login></app-login>
+      </p-dialog>
+
+      <button
+        (click)="showRegister()"
+        pButton
+        type="button"
+        label="SIGN UP"
+        class="signup-btn"
+      ></button>
+      <p-dialog
+        header="Register"
+        [modal]="true"
+        [(visible)]="displayRegister"
+        [style]="{ width: '50vw' }"
+      >
+        <app-register></app-register>
+      </p-dialog>
+    </div>
+  </div>
 </div>

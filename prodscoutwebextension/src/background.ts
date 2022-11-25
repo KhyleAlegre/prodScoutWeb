@@ -312,7 +312,6 @@ async function getFirestore() {
   endSession = profileData[0].endSessionDate;
   checkNudge();
   checkSS();
-  checkSchedule();
   getUser();
 }
 
@@ -402,29 +401,5 @@ function checkSS() {
   if (SSRequest == true) {
     console.log('Screenshot requested');
     getScreenshot();
-  }
-}
-
-// Set Schedule
-function checkSchedule() {
-  if (startSession == '' || endSession == '') {
-    console.log('Holiday Mode');
-    holidayMode = true;
-  } else {
-    sessionDate = new Date();
-    startSession = new Date(startSession);
-    endSession = new Date(endSession);
-    startSession.setHours(0, 0, 0, 0);
-    endSession.setHours(23, 59, 59, 59);
-
-    if (sessionDate > startSession) {
-      console.log('Check Date', sessionDate);
-      strictMode = true;
-    }
-
-    if (sessionDate < endSession) {
-      strictMode = true;
-      console.log('Strict Mode is in Scheduled');
-    }
   }
 }

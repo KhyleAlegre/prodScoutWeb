@@ -15,6 +15,9 @@ import { AdmindashboardComponent } from './core/admindashboard/admindashboard.co
 import { GalleryComponent } from './library/gallery/gallery.component';
 import { AdminLogsComponent } from './core/admin-logs/admin-logs.component';
 import { WatchlistComponent } from './library/watchlist/watchlist.component';
+import { ProductsComponent } from './chromelanding/Sublinks/products/products.component';
+import { FamiliesComponent } from './chromelanding/Sublinks/families/families.component';
+import { SchoolsComponent } from './chromelanding/Sublinks/schools/schools.component';
 //Dashboard - Parent
 
 // Parent Routes / Main Routes
@@ -34,6 +37,9 @@ const routes: Routes = [
   { path: 'gallery', component: GalleryComponent },
   { path: 'adminLogs', component: AdminLogsComponent },
   { path: 'watchlist', component: WatchlistComponent },
+  { path: 'products', component: ProductsComponent },
+  { path: 'families', component: FamiliesComponent },
+  { path: 'schools', component: SchoolsComponent },
 ];
 
 @NgModule({

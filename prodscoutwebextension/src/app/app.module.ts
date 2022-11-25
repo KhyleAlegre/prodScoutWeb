@@ -69,6 +69,9 @@ import { ChangepwComponent } from './library/changepw/changepw.component';
 import { GalleryComponent } from './library/gallery/gallery.component';
 import { AdminLogsComponent } from './core/admin-logs/admin-logs.component';
 import { WatchlistComponent } from './library/watchlist/watchlist.component';
+import { ProductsComponent } from './chromelanding/Sublinks/products/products.component';
+import { FamiliesComponent } from './chromelanding/Sublinks/families/families.component';
+import { SchoolsComponent } from './chromelanding/Sublinks/schools/schools.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +104,9 @@ import { WatchlistComponent } from './library/watchlist/watchlist.component';
     GalleryComponent,
     AdminLogsComponent,
     WatchlistComponent,
+    ProductsComponent,
+    FamiliesComponent,
+    SchoolsComponent,
   ],
   imports: [
     BrowserModule,

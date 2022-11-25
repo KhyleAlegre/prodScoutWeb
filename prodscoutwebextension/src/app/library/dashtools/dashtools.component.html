@@ -35,34 +35,6 @@
     (click)="setHoliday()"
   ></button>
   <p-divider></p-divider>
-  <div class="field col-12 md:col-4">
-    <label for="icon">Monitoring Start Date</label>
-    <br />
-    <p-calendar
-      [(ngModel)]="startSession"
-      [showIcon]="true"
-      inputId="icon"
-      (onSelect)="getStartSession()"
-    ></p-calendar>
-    <br />
-    <label for="icon">Monitoring End Date</label>
-    <br />
-    <p-calendar
-      [(ngModel)]="endSession"
-      [showIcon]="true"
-      inputId="icon"
-      (onSelect)="getEndSession()"
-    ></p-calendar>
-    <br />
-    <br />
-    <button
-      pButton
-      type="button"
-      label="Schedule the Scouting"
-      class="tool-btn"
-      (click)="showScheduling()"
-    ></button>
-  </div>
 
   <p-dialog
     header="Alert"

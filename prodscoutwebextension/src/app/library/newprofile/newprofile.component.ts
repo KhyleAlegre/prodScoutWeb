@@ -82,8 +82,8 @@ export class NewprofileComponent implements OnInit {
     this.profile.username = this.logUserName;
     this.profile.strictMode = true;
     this.profile.accountCount = 1;
-    this.profile.startSessionDate = new Date();
-    this.profile.endSessionDate = new Date();
+    this.profile.startSessionDate = '';
+    this.profile.endSessionDate = '';
     // Stores to Database
     this.afs.collection('profiles').add(this.profile);
 

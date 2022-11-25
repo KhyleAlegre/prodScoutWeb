@@ -1,37 +1,33 @@
 .main {
-    height: 200px;
-    background-color: #393939;
-    .productLogo {
-        text-align: center;
+  height: 200px;
+  background-color: #393939;
+  .productLogo {
+    text-align: center;
+  }
+
+  @media only screen and (max-width: 480px) {
+    .imgFooter {
+      width: 220px;
+      cursor: pointer;
     }
 
-    @media only screen and (max-width: 480px) {
-        .imgFooter {
-            margin-top: 20px;
-            height: 50px;
-            width: 220px;
-            cursor: pointer;
-        }
-
-        .devs {
-            text-align: center;
-            color:#FAFAFA;
-            font-size: 14px;
-        }
-
+    .devs {
+      text-align: center;
+      color: #fafafa;
+      font-size: 14px;
     }
-    @media only screen and (min-width: 480px) {
-        .imgFooter {
-            margin-top: 20px;
-            height: 80px;
-            width: 350px;
-            cursor: pointer;
-        }
-
-        .devs {
-            text-align: center;
-            color:#FAFAFA;
-        }
+  }
+  @media only screen and (min-width: 480px) {
+    .imgFooter {
+      margin-top: 20px;
+      height: 0px;
+      width: 350px;
+      cursor: pointer;
     }
-    
+
+    .devs {
+      text-align: center;
+      color: #fafafa;
+    }
+  }
 }

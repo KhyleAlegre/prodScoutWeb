@@ -106,8 +106,10 @@ export class RegisterComponent implements OnInit {
     this.matchPW(this.password);
 
     //Creates Username
-    this.fnCode = this.firstName.slice(2);
-    this.lnCode = this.lastName.slice(2);
+    this.fnCode = this.firstName.slice(0, 1);
+    this.lnCode = this.lastName.slice(0, 1);
+    this.fnCode = this.fnCode.toUpperCase();
+    this.lnCode = this.lnCode.toUpperCase();
     this.rgx = Math.floor(Math.random() * 90000) + 10000;
     this.rgx = this.rgx.toString();
 
