@@ -44,6 +44,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     // Load Profile
     this.storedUserData = JSON.parse(localStorage.getItem('userData')!);
+    if (!this.storedUserData) {
+      this.router.navigateByUrl('/home');
+    }
     this.userData = this.storedUserData;
     this.logUser = this.userData[0].firstName;
     this.logRole = this.userData[0].role;

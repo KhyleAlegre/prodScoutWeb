@@ -2,24 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
-  selector: 'app-demoform',
-  templateUrl: './demoform.component.html',
-  styleUrls: ['./demoform.component.scss'],
+  selector: 'app-contactus',
+  templateUrl: './contactus.component.html',
+  styleUrls: ['./contactus.component.scss'],
 })
-export class DemoformComponent implements OnInit {
-  name: any = '';
-  email: any = '';
-  date: any = '';
-  demoDate!: Date;
-  contactNo: any = '';
-  displayContact: boolean = false;
+export class ContactusComponent implements OnInit {
+  schoolName: any;
+  name: any;
+  email: any;
+  demoDate: any;
+  contactNo: any;
   displaySubmit: boolean = false;
-
   constructor(public afs: AngularFirestore) {}
 
   ngOnInit(): void {}
 
-  demoRequest() {
+  sendSignUp() {
     // Send Email to Client
     this.afs.collection('mail').add({
       to: this.email,
@@ -36,26 +34,25 @@ export class DemoformComponent implements OnInit {
     this.afs.collection('mail').add({
       to: 'prodscouts2022@gmail.com',
       message: {
-        subject: 'Demo Request',
+        subject: 'School or Corporate Sign Up Request',
         html:
-          ' An individual requested for a demo, with the following details , Name: ' +
+          'An Institution or Corporate Account wishes to contact with you with the following details ' +
+          'Business Name: ' +
+          this.schoolName +
+          ' , Name: ' +
           this.name +
           ', Email: ' +
           this.email +
           ', Contact No: ' +
           this.contactNo +
-          ', Demo Date: ' +
-          this.demoDate +
           ', please respond',
       },
     });
 
     this.displaySubmit = true;
+    this.schoolName = '';
     this.name = '';
-    this.email = '';
     this.contactNo = '';
-  }
-  enableContact() {
-    this.displayContact = true;
+    this.email = '';
   }
 }

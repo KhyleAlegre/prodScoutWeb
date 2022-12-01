@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
   aphxPrompt: any;
   isMinChar: boolean = false;
   minCharPrompt: any;
-
+  displayContact: boolean = false;
   // API
   postSMS: any = 'https://api.semaphore.co/api/v4/messages';
   postSMSApi: any = '63da0d82e426e76ee3bccf27622cbe83';
@@ -161,5 +161,8 @@ export class RegisterComponent implements OnInit {
 
   openLogin() {
     this.displayLogin = true;
+  }
+  enableContact() {
+    this.displayContact = true;
   }
 }

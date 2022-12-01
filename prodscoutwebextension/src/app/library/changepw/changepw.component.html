@@ -46,4 +46,13 @@
       class="signup-btn"
     ></button>
   </div>
+  <p-dialog
+    header="Change Password Success"
+    [modal]="true"
+    [(visible)]="displayPassword"
+    class="dialogSize"
+  >
+    Your temporary password has been sent to your registered email, please
+    check.
+  </p-dialog>
 </div>

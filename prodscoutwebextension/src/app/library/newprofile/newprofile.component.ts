@@ -54,6 +54,8 @@ export class NewprofileComponent implements OnInit {
     this.logRole = this.userData[0].role;
     this.logUserName = this.userData[0].username;
 
+    this.profileId = Math.random().toString(36).substring(2, 8);
+
     this.avBoy =
       'https://firebasestorage.googleapis.com/v0/b/prodscout-90022.appspot.com/o/2880690.png?alt=media&token=3b695e30-0c8c-47a4-85d1-ff9058717206';
     this.avGirl =
@@ -91,9 +93,10 @@ export class NewprofileComponent implements OnInit {
     this.displaySuccess = true;
 
     //Clear Fields
-    this.profileId = '';
+    this.profileId = Math.random().toString(36).substring(2, 8);
     this.firstName = '';
     this.lastName = '';
     this.password = '';
+    this.avSelect = '';
   }
 }

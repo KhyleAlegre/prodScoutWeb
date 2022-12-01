@@ -1,14 +1,28 @@
 <div class="main">
   <div class="form">
     <h2 style="margin-left: 5px; text-align: center">
-      Schedule A Product Demo with Us
+      Corporate Request Sign Up
     </h2>
     <br />
     <p-divider align="center" type="dashed">
       <b>Please Fill in Your Details</b>
     </p-divider>
     <form>
-      <h5>Name <sup style="font-size: 10px; color: red">*Required</sup></h5>
+      <h5>
+        Name of School <sup style="font-size: 10px; color: red">*Required</sup>
+      </h5>
+      <input
+        name="name"
+        type="text"
+        pInputText
+        [(ngModel)]="schoolName"
+        class="input-form-standard"
+        required
+      />
+      <br />
+      <h5>
+        Contact Person <sup style="font-size: 10px; color: red">*Required</sup>
+      </h5>
       <input
         name="name"
         type="text"
@@ -54,25 +68,10 @@
         type="button"
         label="Schedule Demo"
         class="signup-btn"
-        (click)="demoRequest()"
+        (click)="sendSignUp()"
       ></button>
     </form>
     <p-divider align="center" type="dashed"></p-divider>
-    <div class="footer" (click)="enableContact()">
-      School or Institution? Please
-      <a class="contactUs"><b>Contact Us</b></a> for the corporate Sign Up
-      Account
-    </div>
-
-    <p-dialog
-      header="Contact Form"
-      [modal]="true"
-      [(visible)]="displayContact"
-      class="dialogSize"
-    >
-      <app-contactus></app-contactus>
-    </p-dialog>
-
     <p-dialog
       header="Submit Success"
       [modal]="true"

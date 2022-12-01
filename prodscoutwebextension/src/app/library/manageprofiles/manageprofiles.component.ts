@@ -77,14 +77,8 @@ export class ManageprofilesComponent implements OnInit {
         (this.profileId = this.queriedProfile[0].profileId),
         (this.profilePassword = this.queriedProfile[0].profilePassword),
         (this.accountCount = this.queriedProfile[0].accountCount),
-        (this.holidayMode = this.queriedProfile[0].holidayMode),
         (this.strictMode = this.queriedProfile[0].strictMode),
-        (this.startSession = this.queriedProfile[0].startSessionDate
-          .toDate()
-          .toLocaleDateString()),
-        (this.endSession = this.queriedProfile[0].endSessionDate
-          .toDate()
-          .toLocaleDateString()),
+        (this.holidayMode = this.queriedProfile[0].holidayMode),
         (this.profileDocumentId = this.queriedProfile[0].id),
         (this.profileFirstName = this.queriedProfile[0].firstName),
         (this.profileLastName = this.queriedProfile[0].lastName)

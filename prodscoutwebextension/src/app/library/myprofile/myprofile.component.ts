@@ -193,7 +193,7 @@ export class MyprofileComponent implements OnInit {
     }
 
     this.matchPW(this.newPassword);
-
+    this.displayUpdateSuccess = true;
     this.afs.collection('users').doc(this.accountId).update({
       password: this.newPassword,
     });
@@ -202,11 +202,12 @@ export class MyprofileComponent implements OnInit {
       (data) => (
         (this.userCredentials = data),
         localStorage.setItem('userData', JSON.stringify(this.userCredentials)),
-        window.location.reload()
+        setTimeout(() => {
+          this.router.navigateByUrl('/myprofile');
+        }, 300)
       )
     );
 
-    this.displayUpdateSuccess = true;
     this.newPassword = '';
     this.oldPassword = '';
     this.checkPassword = '';
@@ -228,7 +229,6 @@ export class MyprofileComponent implements OnInit {
         // lower alpha (a-z)
         this.isAphx = false;
         this.aphxPrompt = '';
-        console.log('char apx');
         return;
       }
     }
@@ -264,7 +264,9 @@ export class MyprofileComponent implements OnInit {
               'userData',
               JSON.stringify(this.userCredentials)
             ),
-            window.location.reload()
+            setTimeout(() => {
+              this.router.navigateByUrl('/myprofile');
+            }, 300)
           )
         );
       });

@@ -22,15 +22,7 @@
         [(visible)]="displayDemo"
         class="dialogSize"
       >
-        <li>
-          <b> prodScout - DeskBuddy (Desktop)</b>
-        </li>
-        <li>
-          <b> prodScout - Mobilo (Mobile)</b>
-        </li>
-        <li>
-              <b> prodScout - Webby (Web Extension)</b>
-        </li>
+        <app-demoform></app-demoform>
       </p-dialog>
     </div>
     <div class="appPlatform">
@@ -38,17 +30,38 @@
       <label> Available For:</label>
       <br />
       <li>
-        <img alt="logo" class="iconApps" src="assets/desktopapp.png" />
-        <br />
-        <span class="appSelect">Desktop</span>
+        <a
+          href="https://firebasestorage.googleapis.com/v0/b/prodscout-90022.appspot.com/o/deskty-win32-x64.rar?alt=media&token=5788e497-63c9-40e3-9037-6339737a67d8"
+          download
+          target="_blank"
+        >
+          <img
+            alt="logo"
+            class="iconApps"
+            src="assets/desktopapp.png"
+            (click)="getDownload()"
+          />
+          <br />
+          <span class="appSelect">Desktop</span>
+        </a>
       </li>
       <li>
-        <img alt="logo" class="iconApps" src="assets/webapp.png" />
+        <img
+          alt="logo"
+          class="iconApps"
+          src="assets/webapp.png"
+          (click)="reRoute()"
+        />
         <br />
         <span class="appSelect">Browser</span>
       </li>
       <li>
-        <img alt="logo" class="iconApps" src="assets/mobileapp.png" />
+        <img
+          alt="logo"
+          class="iconApps"
+          src="assets/mobileapp.png"
+          (click)="goToPlaystore()"
+        />
         <br />
         <span class="appSelect">Mobile</span>
       </li>

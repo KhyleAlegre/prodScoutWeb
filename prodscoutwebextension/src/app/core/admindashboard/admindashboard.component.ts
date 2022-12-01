@@ -46,6 +46,9 @@ export class AdmindashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.storedAdminData = JSON.parse(localStorage.getItem('adminData')!);
+    if (!this.storedAdminData) {
+      this.router.navigateByUrl('/rabbithole');
+    }
     this.adminData = this.storedAdminData;
     this.username = this.adminData[0].username;
     this.displayDate = new Date();

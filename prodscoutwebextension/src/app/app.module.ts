@@ -72,6 +72,7 @@ import { WatchlistComponent } from './library/watchlist/watchlist.component';
 import { ProductsComponent } from './chromelanding/Sublinks/products/products.component';
 import { FamiliesComponent } from './chromelanding/Sublinks/families/families.component';
 import { SchoolsComponent } from './chromelanding/Sublinks/schools/schools.component';
+import { ContactusComponent } from './library/contactus/contactus.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { SchoolsComponent } from './chromelanding/Sublinks/schools/schools.compo
     ProductsComponent,
     FamiliesComponent,
     SchoolsComponent,
+    ContactusComponent,
   ],
   imports: [
     BrowserModule,

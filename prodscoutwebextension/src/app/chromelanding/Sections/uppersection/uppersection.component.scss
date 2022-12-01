@@ -1,6 +1,10 @@
 .main {
   display: grid;
 
+  a {
+    text-decoration: none;
+    color: rgb(8, 8, 8);
+  }
   @media only screen and (max-width: 480px) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
@@ -37,6 +41,7 @@
         .iconApps {
           height: 40px;
           width: 40px;
+          cursor: pointer;
         }
 
         .appSelect {
@@ -99,6 +104,7 @@
       .iconApps {
         height: 64px;
         width: 64px;
+        cursor: pointer;
       }
 
       .appSelect {

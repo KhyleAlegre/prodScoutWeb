@@ -126,10 +126,19 @@
       </div>
     </p-dialog>
     <p-divider align="center" type="dashed"></p-divider>
-    <div class="footer">
+    <div class="footer" (click)="enableContact()">
       School or Institution? Please
       <a class="contactUs"><b>Contact Us</b></a> for the corporate Sign Up
       Account
     </div>
+
+    <p-dialog
+      header="Contact Form"
+      [modal]="true"
+      [(visible)]="displayContact"
+      class="dialogSize"
+    >
+      <app-contactus></app-contactus>
+    </p-dialog>
   </div>
 </div>

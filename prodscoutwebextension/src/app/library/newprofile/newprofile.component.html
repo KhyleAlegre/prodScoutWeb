@@ -41,9 +41,7 @@
     <form>
       <h5>
         Profile Id
-        <sup style="font-size: 10px; color: red"
-          >*Required (For Profile Users)</sup
-        >
+        <sup style="font-size: 10px; color: red"></sup>
       </h5>
       <input
         name="profile"
@@ -51,6 +49,7 @@
         pInputText
         [(ngModel)]="profileId"
         class="input-form-standard"
+        disabled
       />
       <br />
       <h5>

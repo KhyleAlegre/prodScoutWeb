@@ -6,14 +6,14 @@ import {
 import { Observable } from 'rxjs';
 import { userModel } from 'src/app/models/users.model';
 import { map } from 'rxjs/operators';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-changepw',
   templateUrl: './changepw.component.html',
   styleUrls: ['./changepw.component.scss'],
 })
 export class ChangepwComponent implements OnInit {
-  constructor(public afs: AngularFirestore) {}
+  constructor(public afs: AngularFirestore, private router: Router) {}
 
   noEmail: boolean = false;
   noUser: boolean = false;
@@ -30,6 +30,7 @@ export class ChangepwComponent implements OnInit {
   userId: any;
   invalidCreds: boolean = false;
   copiedPw: any;
+  displayPassword: boolean = false;
 
   private userCollection!: AngularFirestoreCollection<userModel>;
   users!: Observable<userModel[]>;
@@ -98,10 +99,11 @@ export class ChangepwComponent implements OnInit {
   }
 
   copyPw() {
+    this.displayPassword = true;
+    this.showMain = true;
     this.afs.collection('users').doc(this.userId).update({
       password: this.genPassword,
     });
-    console.log(this.email);
     this.afs.collection('mail').add({
       to: this.email,
       message: {
@@ -113,7 +115,6 @@ export class ChangepwComponent implements OnInit {
       },
     });
 
-    this.showMain = true;
     this.showGenPage = false;
     this.email = '';
     this.username = '';

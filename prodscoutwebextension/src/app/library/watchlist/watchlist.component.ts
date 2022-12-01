@@ -72,6 +72,8 @@ export class WatchlistComponent implements OnInit {
       category: this.categoryValue.value,
       username: this.logUsername,
     });
+
+    this.displayAddPrompt = true;
   }
 
   getApp(appDetails: watchlistModel) {
